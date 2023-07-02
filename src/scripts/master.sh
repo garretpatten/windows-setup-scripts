@@ -1,5 +1,8 @@
 # Begin: System Updates
+winget upgrade -h --all
+wsl
 sudo apt upgrade -y && sudo apt update-y && sudo apt autoremove -y
+exit
 
 # TODO: cd to the root of the project
 
@@ -34,7 +37,10 @@ sh "$(pwd)/src/scripts/misc.sh"
 sh "$(pwd)/src/scripts/addTasks.sh"
 
 # End: System Updates
-sudo apt upgrade-y && sudo apt update-y && flatpak update && sudo apt autoremove -y
+winget upgrade -h --all
+wsl
+sudo apt upgrade -y && sudo apt update-y && sudo apt autoremove -y
+exit
 
 # Create a break in output
 echo ''
