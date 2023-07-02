@@ -2,7 +2,7 @@
 if [[ -f "/usr/bin/flatpak" ]]; then
 	echo "flatpak is already installed."
 else
-	sudo dnf install flatpak -y
+	sudo apt install flatpak -y
 fi
 
 # Add remote Flatpak repos
