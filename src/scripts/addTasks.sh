@@ -6,9 +6,11 @@ if [[ -f "/usr/bin/task" ]]; then
 	task add Take a snapshot of system project:setup priority:H
 	task add Export GitHub PAT with 1Password project:dev priority:H
  	task add Pin apps to taskbar project:setup priority:H
-  	# 1Password, Bard PWA, Chat GPT PWA, File Explorer, Microsoft Edge,
-   	# Notion, Proton VPN, Signal, Simplenote, Spotify, Steam, Terminal,
-    	# Todoist, VS Code
+
+  	task 3 annotate \
+   	1Password, Bard PWA, Chat GPT PWA, File Explorer, Microsoft Edge, \
+   	Notion, Proton VPN, Signal, Simplenote, Spotify, Steam, Terminal, \
+    	Todoist, VS Code
 
 	# Medium Priority Tasks
 	task add Sign into and sync Brave project:setup priority:M
