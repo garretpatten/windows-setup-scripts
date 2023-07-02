@@ -1,5 +1,5 @@
 # Begin: System Updates
-sudo dnf upgrade -y && sudo dnf update-y && sudo dnf autoremove -y
+sudo apt upgrade -y && sudo apt update-y && sudo apt autoremove -y
 
 # TODO: cd to the root of the project
 
@@ -34,7 +34,7 @@ sh "$(pwd)/src/scripts/misc.sh"
 sh "$(pwd)/src/scripts/addTasks.sh"
 
 # End: System Updates
-sudo dnf upgrade-y && sudo dnf update-y && flatpak update && sudo dnf autoremove -y
+sudo apt upgrade-y && sudo apt update-y && flatpak update && sudo apt autoremove -y
 
 # Create a break in output
 echo ''
