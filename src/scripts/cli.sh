@@ -12,7 +12,6 @@ done
 
 winget install -e --id Python.Python.3.8
 
-# Switch to Windows Subsystem for Linux
 wsl
 
 # Install basic CLI tools on Windows Subsystem for Linux
@@ -26,5 +25,4 @@ for cliTool in ${cliTools[@]}; do
 	fi
 done
 
-# Switch to Powershell
 exit
