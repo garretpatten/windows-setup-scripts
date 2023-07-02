@@ -33,4 +33,9 @@ for flatpakApp in ${flatpakApps[@]}; do
 	fi
 done
 
-## TODO: Install Notion
+# Switch from WSL to Powershell
+exit
+
+## Install Notion
+ winget install -e --id Notion.Notion
+ 
