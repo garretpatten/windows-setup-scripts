@@ -4,7 +4,7 @@ for terminalApp in ${terminalApps[@]}; do
     if [[ -f "/usr/bin/$terminalApp" ]]; then
         echo "$terminalApp is already installed."
     else
-        sudo dnf install "$terminalApp" -y
+        sudo apt install "$terminalApp" -y
     fi
 done
 
