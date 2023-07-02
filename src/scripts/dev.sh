@@ -15,7 +15,7 @@ for app in ${apps[@]}; do
 	if [[ -f "/usr/local/bin/$app" ]]; then
 		echo "$app is already installed."
 	else
-		dnf install "$app" -y
+		apt install "$app" -y
 	fi
 done
 
