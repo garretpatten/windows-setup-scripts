@@ -1,19 +1,18 @@
 #!/bin/bash
 
-# Git config
+# PowerShell: Git config
 git config --global credential.helper cache
 git config --global user.email "garret.patten@proton.me"
 git config --global user.name "Garret Patten"
 git config pull.rebase false
 
-# Vim config
+# PowerShell: Vim config
 cat "$(pwd)/src/artifacts/vim/vimrc.txt" >> ~/.vimrc
 
-# Install GitHub CLI && Sourcegraph CLI
+# PowerShell: Install GitHub CLI
 winget install -e --id GitHub.cli
 
-# TODO: Install Semgrep
-winget install -e --id Python.Python.3.8
+# TODO: PowerShell: Install Semgrep
 
 # TODO: Update filepath check
 if [[ -f "~/.local/bin/semgrep" ]]; then
