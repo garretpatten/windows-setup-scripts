@@ -31,7 +31,7 @@ sh src/scripts/master.sh
 - 1password-cli, bat, brew, clamav, exa, gh, git, neofetch, protonvpn-cli, src-cli, taskwarrior, wget, zsh
 
 ## Applications
-- 1Password, Balena Etcher, Brave Browser, Burp Suite, Firefox, iTerm2, Postman, Proton VPN, Signal, Simplenote, Sourcegraph, Spotify, Thunderbird, Todoist, VLC, VS Code, Zoom
+- 1Password, Balena Etcher, Brave Browser, Burp Suite, DuckDuckGo, Firefox, iTerm2, Notion, Postman, Proton VPN, Signal, Simplenote, Sourcegraph, Spotify, Steam, Thunderbird, Todoist, VLC, VS Code, Zoom
 
 ## Configurations
 - Taskwarrior, Vim, Z shell
