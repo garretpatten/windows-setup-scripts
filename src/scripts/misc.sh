@@ -5,4 +5,6 @@ if [[ -f "/usr/bin/thunderbird" ]]; then
 	sudo apt install thunderbird -y
 fi
 
+# TODO: Install Steam
+
 # TODO: Install VLC
