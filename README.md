@@ -7,10 +7,10 @@ A repository of setup scripts for my personal windows environments
 1. Carry out a full system update through System Settings.
 2. Install and Configure Windows Subsystem for Linux (WSL): `wsl --install`
 3. Ensure WSL is using Ubuntu as the default distribution.
-4. Right click Terminal application window and click Settings. Ensure 'Ubuntu' is set as the default profile.
-5. Be prepared with 2 hardware keys (primary & backup).
+4. Be prepared with 2 hardware keys (primary & backup).
 
 ## How to Use
+With a Terminal window open with Powershell:
 ```
 # Clone repository
 git clone https://github.com/garretpatten/windows-setup-scripts
