@@ -2,7 +2,7 @@
 if [[ -f "/usr/bin/task" ]]; then
 	echo "Taskwarrior is already installed."
 else
-	sudo dnf install task -y
+	sudo apt install taskwarrior -y
 fi
 
 # Taskwarrior config
@@ -29,6 +29,6 @@ for flatpakApp in ${flatpakApps[@]}; do
 	elif [[ -d "~/.local/share/flatpak/app/$flatpakApp" ]]; then
 		echo "$flatpak is already installed."
 	else
-		sudo dnf install "$flatpakApp" -y
+		sudo flatpak install "$flatpakApp" -y
 	fi
 done
