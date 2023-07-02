@@ -1,3 +1,5 @@
+wsl
+
 # Install Flatpak
 if [[ -f "/usr/bin/flatpak" ]]; then
 	echo "flatpak is already installed."
@@ -8,16 +10,9 @@ fi
 # Add remote Flatpak repos
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-# TODO: Add FlatHub remote
+# Switch from WSL to Powershell
+exit
 
-# Install Signal Messenger, Simplenote, Spotify
-flatpakApps=("org.signal.Signal" "com.spotify.Client")
-for flatpakApp in ${flatpakApps[@]}; do
-	if [[ -d "/var/lib/flatpak/app/$flatpakApp" ]]; then
-		echo "$flatpak is already installed."
-	elif [[ -d "~/.local/share/flatpak/app/$flatpakApp"]]; then
-		echo "$flatpak is already installed."
-	else
-		flatpak install flathub "$flatpak" -y
-	fi
-done
+# TODO: Install Signal Messenger
+
+winget install -e --id Spotify.Spotify
