@@ -6,6 +6,6 @@ for cliTool in ${cliTools[@]}; do
 	elif [ -f "/usr/sbin/$cliTool"]; then
 		echo "$cliTool is already installed."
 	else
-		sudo dnf install "$cliTool" -y
+		sudo apt install "$cliTool" -y
 	fi
 done
