@@ -9,8 +9,8 @@ if [[ -f "/usr/bin/task" ]]; then
 
   	task 3 annotate \
    	1Password, Bard PWA, Chat GPT PWA, File Explorer, Microsoft Edge, \
-   	Notion, Proton VPN, Signal, Simplenote, Spotify, Steam, Terminal, \
-    	Todoist, VS Code
+   	Notion, PowerShell Proton VPN, Signal, Simplenote, Spotify, Steam, \
+    	Terminal, Todoist, VS Code
 
 	# Medium Priority Tasks
 	task add Sign into and sync Brave project:setup priority:M
