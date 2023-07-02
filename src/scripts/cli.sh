@@ -10,6 +10,8 @@ for cliTool in ${cliTools[@]}; do
 	fi
 done
 
+winget install -e --id Python.Python.3.8
+
 # Switch to Windows Subsystem for Linux
 wsl
 
