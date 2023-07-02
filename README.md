@@ -10,7 +10,7 @@ A repository of setup scripts for my personal windows environments
 4. Be prepared with 2 hardware keys (primary & backup).
 
 ## How to Use
-With a Terminal window open with Powershell:
+Open a PowerShell Window running as Administrator, and:
 ```
 # Clone repository
 git clone https://github.com/garretpatten/windows-setup-scripts
