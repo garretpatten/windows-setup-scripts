@@ -1,6 +1,6 @@
-# TODO: Move this to preinstall.sh
-# Allow Script Execution
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+# TODO: Copy Windows PowerShell profile to correct filepath
+
+wsl
 
 # Install Terminator and zsh
 terminalApps=("terminator" "zsh")
@@ -31,3 +31,5 @@ fi
 
 # Reload config file
 source ~/.zshrc
+
+exit
