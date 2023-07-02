@@ -32,3 +32,5 @@ for flatpakApp in ${flatpakApps[@]}; do
 		sudo flatpak install "$flatpakApp" -y
 	fi
 done
+
+## TODO: Install Notion
