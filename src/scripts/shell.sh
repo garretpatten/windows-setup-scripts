@@ -1,3 +1,7 @@
+# TODO: Move this to preinstall.sh
+# Allow Script Execution
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
 # Install Terminator and zsh
 terminalApps=("terminator" "zsh")
 for terminalApp in ${terminalApps[@]}; do
