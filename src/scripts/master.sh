@@ -15,6 +15,7 @@ sh "$(pwd)/src/scripts/security.sh"
 # CLI Tooling
 sh "$(pwd)/src/scripts/cli.sh"
 
+# TODO: Rename or break up this script
 # Flatpak Apps
 sh "$(pwd)/src/scripts/flatpak.sh"
 
