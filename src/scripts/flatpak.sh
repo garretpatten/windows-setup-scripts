@@ -14,5 +14,6 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 exit
 
 # TODO: Install Signal Messenger
+winget install -e --id OpenWhisperSystems.Signal
 
 winget install -e --id Spotify.Spotify
