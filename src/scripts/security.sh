@@ -3,11 +3,16 @@
 # TODO: Setup hardware keys
 
 # TODO: Ensure Windows firewall is installed
-## TODO: Install 1Password
 
-# TODO: Install Proton VPN
+# Install 1Password
+winget install -e --id AgileBits.1Password
+
+# Install Proton VPN
+winget install -e --id ProtonTechnologies.ProtonVPN
 
 # TODO: Ensure Windows Anti Virus is configured
+
+wsl
 
 # Install nmap
 if [[ -f "/usr/bin/nmap" ]]; then
@@ -15,3 +20,5 @@ if [[ -f "/usr/bin/nmap" ]]; then
 else
     sudo apt install nmap -y
 fi
+
+exit
