@@ -1,4 +1,6 @@
-wsl && cd
+wsl
+
+cd
 
 # Install CLI tools on Windows Subsystem for Linux
 cliTools=("bat" "curl" "exa" "git" "https" "htop" "neofetch" "openvpn" "poppler-utils" "wget")
