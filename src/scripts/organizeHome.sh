@@ -1,5 +1,9 @@
 #!/bin/bash
 
+wsl
+
+cd
+
 # Add needed directories
 directoriesToCreate=("Repositories")
 for directoryToCreate in ${directoriesToCreate[@]}; do
@@ -9,3 +13,5 @@ for directoryToCreate in ${directoriesToCreate[@]}; do
 		mkdir "~/$directoryToCreate"
 	fi
 done
+
+exit
