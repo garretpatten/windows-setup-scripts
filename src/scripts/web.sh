@@ -1,3 +1,4 @@
+# TODO: Update filepaths
 # Install Brave, DuckDuckGo, Firefox
 apps=("Brave.Brave" "DuckDuckGo.DesktopBrowser" "Mozilla.Firefox")
 for app in ${apps[@]}; do
