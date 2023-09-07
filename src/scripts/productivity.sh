@@ -25,6 +25,7 @@ cp -r "$(pwd)/src/artifacts/taskwarrior/themes/" ~/.task/themes/
 
 exit
 
+# TODO: Update filepaths
 # Install Simplenote, Notino, Todoist
 apps=("Automattic.Simplenote" "Doist.Todoist" "Notion.Notion")
 for app in ${apps[@]}; do
@@ -33,6 +34,6 @@ for app in ${apps[@]}; do
 	elif [[ -d "~/.local/share/flatpak/app/$flatpakApp" ]]; then
 		echo "$apps is already installed."
 	else
-		winget install -e --id Automattic.Simplenote "$app" -y
+		winget install -e --id "$app" -y
 	fi
 done
