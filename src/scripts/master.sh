@@ -1,7 +1,7 @@
 # Begin: System Updates
 winget upgrade -h --all
 wsl
-sudo apt upgrade -y && sudo apt update-y && sudo apt autoremove -y
+sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y
 exit
 
 # TODO: cd to the root of the project
