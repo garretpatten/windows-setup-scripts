@@ -3,7 +3,7 @@
 wsl
 
 # Install Terminator and zsh
-terminalApps=("terminator" "zsh")
+terminalApps=("zsh")
 for terminalApp in ${terminalApps[@]}; do
     if [[ -f "/usr/bin/$terminalApp" ]]; then
         echo "$terminalApp is already installed."
