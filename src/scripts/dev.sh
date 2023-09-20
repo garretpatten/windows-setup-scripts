@@ -6,7 +6,7 @@ wsl
 git config --global credential.helper cache
 git config --global user.email "garret.patten@proton.me"
 git config --global user.name "Garret Patten"
-git config pull.rebase false
+git config --global pull.rebase false
 
 # PowerShell: Vim config
 cat "$(pwd)/src/artifacts/vim/vimrc.txt" >> ~/.vimrc
