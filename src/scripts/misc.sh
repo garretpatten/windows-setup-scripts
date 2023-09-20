@@ -1,10 +1,8 @@
 # Thunderbird
-if [[ -f "/usr/bin/thunderbird" ]]; then
- 	echo "Thunderbird is already installed."
- else
-	sudo apt install thunderbird -y
-fi
+winget install -e --id Mozilla.Thunderbird
 
 # TODO: Install Steam
+winget install -e --id Valve.Steam
 
-# TODO: Install VLC
+# Install VLC
+winget install -e --id VideoLAN.VLC
