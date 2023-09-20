@@ -1,5 +1,7 @@
 #!/bin/bash
 
+wsl
+
 # PowerShell: Git config
 git config --global credential.helper cache
 git config --global user.email "garret.patten@proton.me"
