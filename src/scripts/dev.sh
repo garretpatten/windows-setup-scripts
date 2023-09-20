@@ -1,24 +1,7 @@
 #!/bin/bash
 
-wsl
-
-# PowerShell: Git config
-git config --global credential.helper cache
-git config --global user.email "garret.patten@proton.me"
-git config --global user.name "Garret Patten"
-git config --global pull.rebase false
-
 # PowerShell: Vim config
 cat "$(pwd)/src/artifacts/vim/vimrc.txt" >> ~/.vimrc
-
-# TODO: PowerShell: Install Semgrep
-
-# TODO: Update filepath check
-if [[ -f "~/.local/bin/semgrep" ]]; then
-	echo "Semgrep is already installed."
-else
-	python3 -m pip install semgrep
- fi
 
  # Install VS Code
  # TODO: Update filepath check
@@ -28,27 +11,20 @@ else
 	winget -e --id Microsoft.VisualStudioCode
 fi
 
-# Switch to Windows Subsystem for Linux
 wsl
 
 # Git config
 git config --global credential.helper cache
 git config --global user.email "garret.patten@proton.me"
 git config --global user.name "Garret Patten"
-git config pull.rebase false
-
-# Vim config
-cat "$(pwd)/src/artifacts/vim/vimrc.txt" >> ~/.vimrc
-
-# Install GitHub CLI && Sourcegraph CLI
-winget install -e --id GitHub.cli
+git config --global pull.rebase false
 
 apps=("gh" "src-cli")
 for app in ${apps[@]}; do
 	if [[ -f "/usr/local/bin/$app" ]]; then
 		echo "$app is already installed."
 	else
-		apt install "$app" -y
+		sudo apt install "$app" -y
 	fi
 done
 
@@ -60,5 +36,4 @@ else
 # Install Postman
 flatpak install flathub org.getpostman.Postman -y
 
-# Switch to Powershell
 exit
