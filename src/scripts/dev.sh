@@ -11,9 +11,6 @@ git config --global pull.rebase false
 # PowerShell: Vim config
 cat "$(pwd)/src/artifacts/vim/vimrc.txt" >> ~/.vimrc
 
-# PowerShell: Install GitHub CLI
-winget install -e --id GitHub.cli
-
 # TODO: PowerShell: Install Semgrep
 
 # TODO: Update filepath check
