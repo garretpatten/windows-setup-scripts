@@ -8,7 +8,7 @@ else
 fi
 
 # Taskwarrior config
-cat "$(pwd)/src/artifacts/taskwarrior/taskrcUpdates.txt" >> ~/.taskrc
+cat "$(pwd)/src/config-files/taskwarrior/taskrcUpdates.txt" >> ~/.taskrc
 
 # Add directory for custom themes
 if [[ -d "~/.task/themes/" ]]; then
@@ -19,7 +19,7 @@ fi
 
 ### TODO: Update this from copying an artifact to pulling themes from GitHub ###
 # Add custom themes to directory
-cp -r "$(pwd)/src/artifacts/taskwarrior/themes/" ~/.task/themes/
+cp -r "$(pwd)/src/config-files/taskwarrior/themes/" ~/.task/themes/
 
 # TODO: Set dark blue theme
 

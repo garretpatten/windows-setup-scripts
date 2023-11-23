@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # PowerShell: Vim config
-cat "$(pwd)/src/artifacts/vim/vimrc.txt" >> ~/.vimrc
+cat "$(pwd)/src/config-files/vim/vimrc.txt" >> ~/.vimrc
 
  # Install VS Code
  # TODO: Update filepath check
 if [[ -f "/usr/bin/code" ]]; then
 	echo "VS Code is already installed."
-else		
+else
 	winget -e --id Microsoft.VisualStudioCode
 fi
 

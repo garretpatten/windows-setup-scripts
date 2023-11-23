@@ -26,7 +26,7 @@ else
     git clone https://github.com/zsh-users/zsh-autosuggestions.git
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
-    cat "$(pwd)/src/artifacts/zsh/zshrc.txt" > ~/.zshrc
+    cat "$(pwd)/src/config-files/zsh/zshrc.txt" > ~/.zshrc
 fi
 
 # Reload config file
