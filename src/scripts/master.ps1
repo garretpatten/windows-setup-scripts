@@ -1,13 +1,12 @@
+# Ensure the execution policy allows script running
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
 # Begin: System Updates
 winget upgrade -h --all
-wsl
-sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y
-exit
-
-# TODO: cd to the root of the project
+wsl "sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y"
 
 # Organize Directories
-sh "$(pwd)/src/scripts/organizeHome.sh"
+.\organizeHome.ps1
 
 # Security: YubiKeys, Firewall, VPN, Anti-Virus
 sh "$(pwd)/src/scripts/security.sh"
@@ -23,10 +22,10 @@ sh "$(pwd)/src/scripts/flatpak.sh"
 sh "$(pwd)/src/scripts/productivity.sh"
 
 # Web Apps
-sh "$(pwd)/src/scripts/web.sh"
+.\web.ps1
 
 # Development Setup
-sh "$(pwd)/src/scripts/dev.sh"
+.\dev.ps1
 
 # Shell: Terminator, zsh, oh-my-zsh
 sh "$(pwd)/src/scripts/shell.sh"

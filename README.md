@@ -6,7 +6,7 @@ A repository of setup scripts for my personal windows environments
 ## Before Using
 1. Carry out a full system update through System Settings.
 2. Install and Configure Windows Subsystem for Linux (WSL): `wsl --install`
-3. Ensure WSL is using Ubuntu as the default distribution.
+3. Ensure WSL is using Ubuntu or Kali as the default distribution.
 4. Be prepared with 2 hardware keys (primary & backup).
 
 ## How to Use
@@ -18,11 +18,8 @@ git clone https://github.com/garretpatten/windows-setup-scripts
 # Checkout root of project
 cd windows-setup-scripts
 
-# Make scripts executable
-sudo chmod +x src/scripts/
-
 # Run master script
-sh src/scripts/master.sh
+.\src\scripts\master.ps1
 ```
 
 # Installations
