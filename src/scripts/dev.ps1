@@ -4,7 +4,7 @@ $wslPath = $powershellPath -replace 'C:\\', '/mnt/c/'
 $wslPath = $wslPath -replace '\\', '/'
 wsl cp "$wslPath/src/config-files/vim/.vimrc ~/.vimrc"
 
-# Install VS Code
+# Install and configure VS Code
 function Is-VSCodeInstalled {
     $vscodePaths = @(
         "${env:ProgramFiles}\Microsoft VS Code\Code.exe",
@@ -25,6 +25,7 @@ if (Is-VSCodeInstalled) {
     Write-Host "VS Code is already installed."
 } else {
     winget install --id Microsoft.VisualStudioCode -e --source winget
+    Copy-Item ..\config-files\vs-code\settings.json C:\Users\YourUsername\AppData\Roaming\Code\User\settings.json
 }
 
 # Configure Git
