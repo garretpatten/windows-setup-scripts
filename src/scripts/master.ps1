@@ -12,7 +12,7 @@ wsl "sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y"
 sh "$(pwd)/src/scripts/security.sh"
 
 # CLI Tooling
-sh "$(pwd)/src/scripts/cli.sh"
+.\cli.ps1
 
 # TODO: Rename or break up this script
 # Flatpak Apps
@@ -38,13 +38,6 @@ sh "$(pwd)/src/scripts/addTasks.sh"
 
 # End: System Updates
 winget upgrade -h --all
-wsl
-sudo apt upgrade -y && sudo apt update-y && sudo apt autoremove -y
-exit
+wsl "sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y"
 
-# Create a break in output
-echo ''
-echo ''
-echo ''
-
-echo "Cheers -- system setup is now complete!"
+Write-Output "\n\n\nCheers -- system setup is now complete!"
