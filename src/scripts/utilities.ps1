@@ -1,3 +1,6 @@
+# Install Oracle VirtualBox
+winget install -e --id=Oracle.VirtualBox --source winget
+
 # Install Signal
 winget install -e --id OpenWhisperSystems.Signal --source winget
 
