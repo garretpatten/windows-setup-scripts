@@ -1,4 +1,4 @@
-# PowerShell: Vim config
+# Configure Vim
 $powershellPath="$pwd"
 $wslPath = $powershellPath -replace 'C:\\', '/mnt/c/'
 $wslPath = $wslPath -replace '\\', '/'
@@ -21,27 +21,25 @@ function Is-VSCodeInstalled {
     return $false
 }
 
-# Check if VS Code is installed
 if (Is-VSCodeInstalled) {
     Write-Host "VS Code is already installed."
 } else {
-    # Install VS Code using winget
     winget install --id Microsoft.VisualStudioCode -e --source winget
 }
 
-# Git config
+# Configure Git
 wsl "git config --global credential.helper cache"
 wsl "git config --global user.email 'garret.patten@proton.me'"
 wsl "git config --global user.name 'Garret Patten'"
 wsl "git config --global pull.rebase false"
 
-# GitHub CLI
+# Install GitHub cli
 wsl "if [[ ! -f /usr/local/bin/gh ]]; then sudo apt install gh -y; fi"
 
-# Soucegraph CLI
+# Install Sourcegraph cli
 wsl "if [[ ! -f /usr/local/bin/src-cli ]]; then sudo apt install src-cli -y; fi"
 
-# Semgrep CLI
+# Install Semgrep cli
 wsl "if [[ ! -f ~/.local/bin/semgrep ]]; then python3 -m pip install semgrep; fi"
 
 # Install Postman

@@ -1,43 +1,30 @@
-# Ensure the execution policy allows script running
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\pre-install.ps1
 
-# Begin: System Updates
-winget upgrade -h --all
-wsl "sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y"
-
-# Organize Directories
+# Organise WSL home directory
 .\organizeHome.ps1
 
-# Security: YubiKeys, Firewall, VPN, Anti-Virus
-sh "$(pwd)/src/scripts/security.sh"
+# Security
+.\security.ps1
 
 # CLI Tooling
 .\cli.ps1
 
-# TODO: Rename or break up this script
-# Flatpak Apps
-sh "$(pwd)/src/scripts/flatpak.sh"
-
-# Productivity: Taskwarrior, Todoist
-sh "$(pwd)/src/scripts/productivity.sh"
-
-# Web Apps
-.\web.ps1
-
-# Development Setup
+# Development setup (WSL)
 .\dev.ps1
 
-# Shell: Terminator, zsh, oh-my-zsh
-sh "$(pwd)/src/scripts/shell.sh"
+# Gaming platforms
+.\gaming.ps1
 
-# Other: Thunderbird
-sh "$(pwd)/src/scripts/misc.sh"
+# Productivity apps
+.\productivity.ps1
 
-# Add Taskwarrior tasks
-sh "$(pwd)/src/scripts/addTasks.sh"
+# Shell setup (WSL)
+.\shell.sh
 
-# End: System Updates
-winget upgrade -h --all
-wsl "sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y"
+# Utilities
+.\utilities.ps1
 
-Write-Output "\n\n\nCheers -- system setup is now complete!"
+# Web Browsers
+.\web.ps1
+
+.\post-install.ps1

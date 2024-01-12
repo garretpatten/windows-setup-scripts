@@ -7,5 +7,3 @@ wsl "if [[ ! -f '/usr/bin/htop' ]]; then sudo apt install htop; fi"
 wsl "if [[ ! -f '/usr/bin/neofetch' ]]; then sudo apt install neofetch; fi"
 wsl "if [[ ! -f '/usr/sbin/openvpn' ]]; then sudo apt install openvpn; fi"
 wsl "if [[ ! -f '/usr/bin/wget' ]]; then sudo apt install wget; fi"
-
-cliTools=("poppler-utils")
