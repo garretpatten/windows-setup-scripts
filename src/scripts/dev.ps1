@@ -25,7 +25,7 @@ if (Is-VSCodeInstalled) {
     Write-Host "VS Code is already installed."
 } else {
     winget install --id Microsoft.VisualStudioCode -e --source winget
-    Copy-Item ..\config-files\vs-code\settings.json C:\Users\YourUsername\AppData\Roaming\Code\User\settings.json
+    Copy-Item ..\config-files\vs-code\settings.json $env:USERPROFILE\AppData\Roaming\Code\User\settings.json
 }
 
 # Configure Git
