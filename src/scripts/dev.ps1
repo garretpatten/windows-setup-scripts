@@ -37,6 +37,15 @@ wsl "git config --global pull.rebase false"
 # Install GitHub cli
 wsl "if [[ ! -f /usr/local/bin/gh ]]; then sudo apt install gh -y; fi"
 
+# Install Node.js, npm, and npm packages
+# TODO: May need to add nodejs repository
+wsl "sudo apt install nodejs -y"
+wsl "sudo npm install -g neovim"
+
+# Install Ruby and gem
+wsl "sudo apt install ruby-rubygems -y"
+wsl "gem install neovim"
+
 # Install Sourcegraph cli
 wsl "if [[ ! -f /usr/local/bin/src-cli ]]; then sudo apt install src-cli -y; fi"
 
