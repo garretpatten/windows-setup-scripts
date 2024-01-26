@@ -1,3 +1,6 @@
+# Install Adobe Acrobat Reader
+winget install -e --id Adobe.Acrobat.Reader.64-bit
+
 # Install Oracle VirtualBox
 winget install -e --id=Oracle.VirtualBox --source winget
 
