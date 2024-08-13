@@ -1,11 +1,11 @@
-# Install Notion
+# Notion
 winget install -e --id Notion.Notion --source winget
 
-# Install Standard Notes
+# Standard Notes
 winget install -e --id StandardNotes.StandardNotes --source winget
 
-# Install Thunderbird
+# Thunderbird
 winget install -e --id Mozilla.Thunderbird --source winget
 
-# Install Todoist
+# Todoist
 winget install -e --id Doist.Todoist --source winget

@@ -3,12 +3,6 @@ A repository of setup scripts for my personal windows environments
 
 # Instructions
 
-## Before Using
-1. Carry out a full system update through System Settings.
-2. Install and Configure Windows Subsystem for Linux (WSL): `wsl --install`
-3. Ensure WSL is using Ubuntu or Kali as the default distribution.
-4. Be prepared with 2 hardware keys (primary & backup).
-
 ## How to Use
 Open a PowerShell Window running as Administrator, and:
 ```
@@ -24,15 +18,47 @@ cd windows-setup-scripts
 
 # Installations
 
-## CLI Tools
-- 1password-cli, bat, brew, clamav, exa, gh, git, neofetch, protonvpn-cli, src-cli, taskwarrior, wget, zsh
-
-## Applications
-- 1Password, Balena Etcher, Brave Browser, Burp Suite, DuckDuckGo, Firefox, iTerm2, Notion, Postman, Proton VPN, Signal, Simplenote, Sourcegraph, Spotify, Steam, Thunderbird, Todoist, VLC, VS Code, Zoom
+## CLI Tools and Terminal Applications
+- 1password-cli
+- bat
+- cURL
+- eza
+- fastfetch
+- fd
+- git
+- grep
+- neovim
+- openvpn
+- ripgrep
+- protonvpn-cli
+- vim
+- wget
 
 ## Configurations
-- Taskwarrior, Vim, Z shell
+- Windows Defender
+- Windows Firewall
 
----
-
-*Disclaimer: Code under active development*
+## Desktop Applications
+- 1Password
+- Adobe Acrobat Reader
+- Balena Etcher
+- Brave Browser
+- Burp Suite
+- DuckDuckGo
+- Firefox
+- Notion
+- Oracle VirtualBox
+- Postman
+- Proton VPN
+- RetroArch
+- Rufus
+- Signal Messenger
+- Spotify
+- Standard Notes
+- Steam
+- Thunderbird
+- Todoist
+- VLC Media Player
+- VS Code
+- ZAProxy
+- Zoom

@@ -4,17 +4,11 @@ winget install -e --id AgileBits.1Password
 # Burp Suite
 winget install -e --id PortSwigger.BurpSuite.Community --source winget
 
-# OWASP ZAP
-winget install -e --id ZAP.ZAP --source winget
-
-# Windows firewall
-Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
-
-# OWASP ZAP
-winget install -e --id ZAP.ZAP --source winget
-
 # Proton VPN
 winget install -e --id ProtonTechnologies.ProtonVPN
+
+# ZAProxy
+winget install -e --id ZAP.ZAP --source winget
 
 ### Windows Defender ###
 

@@ -31,5 +31,8 @@ winget install -e --id OpenVPNTechnologies.OpenVPN --source winget
 # Ripgrep
 winget install -e --id BurntSushi.ripgrep.GNU --source winget
 
+# Vim
+winget install -e --id vim.vim --source winget
+
 # Wget
 winget insatll -e --id GNU.Wget2 --source winget
