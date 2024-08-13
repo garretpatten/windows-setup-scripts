@@ -1,15 +1,15 @@
 .\pre-install.ps1
 
-# Security: 1Password, Proton VPN, and system configuration
+# Security apps and configuration
 .\security.ps1
 
 # CLI tools
 .\cli.ps1
 
-# Development: Postman, VS Code
+# Development and virtual machine software
 .\dev.ps1
 
-# Gaming: Retroarch, Steam
+# Gaming platforms
 .\gaming.ps1
 
 # Messaging, streaming, and video applications
@@ -18,10 +18,7 @@
 # Productivity programs
 .\productivity.ps1
 
-# Shell Setup
-.\shell.sh
-
-# Browsers
+# Web browsers
 .\web.ps1
 
 .\post-install.ps1

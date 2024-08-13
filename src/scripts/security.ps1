@@ -1,13 +1,23 @@
-# Enable Windows firewall
-Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
-
-# Install 1Password
+# 1Password
 winget install -e --id AgileBits.1Password
 
-# Install Proton VPN
+# Burp Suite
+winget install -e --id PortSwigger.BurpSuite.Community --source winget
+
+# OWASP ZAP
+winget install -e --id ZAP.ZAP --source winget
+
+# Windows firewall
+Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
+
+# OWASP ZAP
+winget install -e --id ZAP.ZAP --source winget
+
+# Proton VPN
 winget install -e --id ProtonTechnologies.ProtonVPN
 
-# Configure Windows Defender
+### Windows Defender ###
+
 # Enable Real-Time Monitoring
 Set-MpPreference -DisableRealtimeMonitoring $false
 # Enable network protection (against network-based threats)
@@ -24,3 +34,6 @@ Set-MpPreference -DisableBehaviorMonitoring $false
 Set-MpPreference -DisableScriptScanning $false
 # Enable scanning of removable drives during full scan
 Set-MpPreference -DisableRemovableDriveScanning $false
+
+# Windows firewall
+Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
