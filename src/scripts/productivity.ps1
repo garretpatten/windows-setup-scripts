@@ -2,10 +2,10 @@
 winget install -e --id Notion.Notion --source winget
 
 # Proton Drive
-winget install -e --id Proton.Drive --source winget
+winget install -e --id Proton.ProtonDrive --source winget
 
 # Proton Mail
-winget install -e --id Proton.Mail --source winget
+winget install -e --id Proton.ProtonMail --source winget
 
 # Standard Notes
 winget install -e --id StandardNotes.StandardNotes --source winget
