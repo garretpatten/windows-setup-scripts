@@ -1,3 +1,6 @@
+# LM Studio
+winget install -e --id LMStudio.LMStudio --source winget
+
 # Postman
 winget install -e --id Postman.Postman --source winget
 

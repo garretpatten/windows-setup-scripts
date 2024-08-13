@@ -46,9 +46,12 @@ cd windows-setup-scripts
 - Burp Suite
 - DuckDuckGo
 - Firefox
+- LM Studio
 - Notion
 - Oracle VirtualBox
 - Postman
+- Proton Drive
+- Proton Mail
 - Proton VPN
 - RetroArch
 - Rufus
@@ -58,6 +61,7 @@ cd windows-setup-scripts
 - Steam
 - Thunderbird
 - Todoist
+- Ubisoft Connect
 - VLC Media Player
 - VS Code
 - ZAProxy

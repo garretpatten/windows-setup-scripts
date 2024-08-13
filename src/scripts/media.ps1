@@ -1,5 +1,8 @@
 # Adobe Acrobat Reader
-winget install -e --id Adobe.Acrobat.Reader.64-bit
+winget install -e --id Adobe.Acrobat.Reader.64-bit --source winget
+
+# Amazon Kindle
+winget install -e --id Amazon.Kindle --source winget
 
 # Balena Etcher
 winget install -e --id Balena.Etcher --source winget
