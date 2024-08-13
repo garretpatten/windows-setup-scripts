@@ -1,30 +1,27 @@
 .\pre-install.ps1
 
-# Organise WSL home directory
-.\organizeHome.ps1
-
-# Security
+# Security: 1Password, Proton VPN, and system configuration
 .\security.ps1
 
-# CLI Tooling
+# CLI tools
 .\cli.ps1
 
-# Development setup (WSL)
+# Development: Postman, VS Code
 .\dev.ps1
 
-# Gaming platforms
+# Gaming: Retroarch, Steam
 .\gaming.ps1
 
-# Productivity apps
+# Messaging, streaming, and video applications
+.\media.sh
+
+# Productivity programs
 .\productivity.ps1
 
-# Shell setup (WSL)
+# Shell Setup
 .\shell.sh
 
-# Utilities
-.\utilities.ps1
-
-# Web Browsers
+# Browsers
 .\web.ps1
 
 .\post-install.ps1

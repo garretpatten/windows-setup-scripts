@@ -1,6 +1,11 @@
 # Update system
 winget upgrade -h --all
-wsl "sudo apt upgrade -y && sudo apt update -y && sudo apt autoremove -y"
+
+printf "\n\n============================================================================\n\n"
+
+Out-File "src/assets/wolf.txt"
+
+printf "\n\n============================================================================\n\n"
 
 # End message
 Write-Output "\n\n\nCheers -- system setup is now complete!"

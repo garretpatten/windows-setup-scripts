@@ -1,10 +1,11 @@
-# Install CLI tools on Windows Subsystem for Linux
-wsl "if [[ ! -f '/usr/bin/batcat' ]]; then sudo apt install batcat; fi"
-wsl "if [[ ! -f '/usr/bin/curl' ]]; then sudo apt install curl; fi"
-wsl "if [[ ! -f '/usr/bin/exa' ]]; then sudo apt install exa; fi"
-wsl "if [[ ! -f '/usr/bin/git' ]]; then sudo apt install git; fi"
-wsl "if [[ ! -f '/usr/bin/htop' ]]; then sudo apt install htop; fi"
-wsl "if [[ ! -f '/usr/bin/neofetch' ]]; then sudo apt install neofetch; fi"
-wsl "if [[ ! -f '/usr/bin/nvim' ]]; then sudo apt install neovim; fi"
-wsl "if [[ ! -f '/usr/sbin/openvpn' ]]; then sudo apt install openvpn; fi"
-wsl "if [[ ! -f '/usr/bin/wget' ]]; then sudo apt install wget; fi"
+winget install -e --id sharkdp.bat --source winget
+winget install -e --id cURL.cURL --source winget
+winget install -e --id eza-community.eza --source winget
+winget install -e --id Fastfetch-cli.Fastfetch --source winget
+winget install -e --id sharkdp.fd --source winget
+winget install -e --id Git.Git --source winget
+winget install -e --id jqlang.jq --source winget
+winget install -e --id Neovim.Neovim --source winget
+winget install -e --id OpenVPNTechnologies.OpenVPN --source winget
+winget install -e --id BurntSushi.ripgrep.GNU --source winget
+winget insatll -e --id GNU.Wget2 --source winget

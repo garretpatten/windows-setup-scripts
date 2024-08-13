@@ -1,5 +1,3 @@
-# TODO: Setup hardware keys
-
 # Enable Windows firewall
 Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
 
@@ -26,6 +24,3 @@ Set-MpPreference -DisableBehaviorMonitoring $false
 Set-MpPreference -DisableScriptScanning $false
 # Enable scanning of removable drives during full scan
 Set-MpPreference -DisableRemovableDriveScanning $false
-
-# Install nmap
-wsl "if [[ ! -f '/usr/bin/nmap' ]]; sudo apt install nmap -y; fi"
