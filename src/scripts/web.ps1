@@ -1,8 +1,4 @@
-# Brave
-winget install --id BraveSoftware.BraveBrowser -e --source winget
+#Requires -Version 7
+. "$PSScriptRoot/utils.ps1"
+'brave','ddg' | ForEach-Object { Install-Pkg $_ }
 
-# DuckDuckGo
-winget install --id DuckDuckGo.DesktopBrowser -e --source winget
-
-# Mozilla Firefox
-winget install --id Mozilla.Firefox -e --source winget
