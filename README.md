@@ -46,15 +46,16 @@ Run with `-WithWSL` to also install WSL + Ubuntu.
 
 ## Script Categories
 
-- `cli.ps1` — Core CLI tools (git, ripgrep, fd, bat, jq, etc.)
-- `dev.ps1` — Developer runtimes (node, python, gh, neovim, docker, src-cli, semgrep) and IDEs (VS Code, Postman). Configures VS Code settings and Neovim packer.
-- `web.ps1` — Browsers (brave, duckduckgo)
-- `media.ps1` — Media apps (spotify, vlc)
-- `productivity.ps1` — Productivity apps (chatgpt, notion, protondrive, zoom)
-- `security.ps1` — Security/networking (1Password, 1Password CLI, nmap, openvpn, burp, zap, protonvpn, signal, exiftool)
-- `shell.ps1` — Windows Terminal, Oh My Posh, fonts (manual for Nerd Fonts)
+- `cli.ps1` — Core CLI tools (git, ripgrep, fd, bat, eza, jq, fzf, zoxide, btop, fastfetch, lazygit, lazydocker, yazi, etc.)
+- `dev.ps1` — Developer runtimes and IDEs (node, go, python, gh, neovim, docker, src-cli, semgrep, cursor, rustup, ollama, ruby, VS Code). Configures Git, VS Code settings, Neovim packer, and language servers.
+- `web.ps1` — Browsers and API clients (brave, duckduckgo, bruno)
+- `media.ps1` — Media apps (spotify, vlc, ffmpeg)
+- `productivity.ps1` — Productivity apps (chatgpt, notion, protondrive, zoom, flameshot, keepassxc, libreoffice, etcher)
+- `security.ps1` — Security/networking (1Password, 1Password CLI, nmap, openvpn, burp, zap, protonvpn, protonpass, signal, exiftool)
+- `shell.ps1` — Windows Terminal, Oh My Posh; Ghostty/tmux/zsh are WSL-only
 - `wsl.ps1` — Installs WSL + Ubuntu 24.04, suggests installing zsh and tmux inside
-- `organizeHome.ps1` — Creates standard folders (Code, Tools, Security, Media, tmp)
+- `dotfiles.ps1` — Symlinks `src/dotfiles/config/<app>/` dirs and copies home/VS Code settings
+- `organizeHome.ps1` — Creates standard folders (Code, Tools, Security, Media, tmp, Hacking, Projects)
 
 ## Notes
 

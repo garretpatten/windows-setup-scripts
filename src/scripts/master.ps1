@@ -7,6 +7,7 @@ param(
   [switch]$SkipProductivity,
   [switch]$SkipSecurity,
   [switch]$SkipShell,
+  [switch]$SkipDotfiles,
   [switch]$WithWSL
 )
 
@@ -30,5 +31,6 @@ if (-not $SkipSecurity)     { Run 'security.ps1' }
 if (-not $SkipShell)        { Run 'shell.ps1' }
 if ($WithWSL)               { Run 'wsl.ps1' }
 
+if (-not $SkipDotfiles)     { Run 'dotfiles.ps1' }
 Run 'organizeHome.ps1'
 
