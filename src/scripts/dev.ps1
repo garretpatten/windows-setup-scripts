@@ -44,9 +44,11 @@ if (-not (Test-Path (Join-Path $HOME ".gitconfig"))) {
   git config --global pull.rebase false
 }
 
-# npm globals
+# Language servers for opencode
+Install-Winget -Id 'LuaLS.lua-language-server'
 if (Test-Cmd node) {
   npm i -g @angular/cli
   npm i -g tree-sitter-cli
+  npm i -g bash-language-server pyright typescript-language-server yaml-language-server
 }
 
