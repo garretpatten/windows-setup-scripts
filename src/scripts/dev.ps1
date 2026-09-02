@@ -20,6 +20,22 @@ if (-not (Test-Path $packerPath)) {
   git clone --depth 1 https://github.com/wbthomason/packer.nvim $packerPath 2>$null | Out-Null
 }
 
+# Shared Git pre-commit hook
+$githooksDir = Join-Path $HOME ".config\githooks"
+$preCommitSrc = Join-Path $repoRoot "src\dotfiles\config\githooks\pre-commit"
+$preCommitPs1Src = Join-Path $repoRoot "src\dotfiles\config\githooks\pre-commit.ps1"
+$preCommitDst = Join-Path $githooksDir "pre-commit"
+$preCommitPs1Dst = Join-Path $githooksDir "pre-commit.ps1"
+Ensure-Dir $githooksDir
+Copy-IfMissing $preCommitSrc $preCommitDst
+Copy-IfMissing $preCommitPs1Src $preCommitPs1Dst
+
+git config --global core.hooksPath 2>$null | Out-Null
+if ($LASTEXITCODE -ne 0) {
+  $githooksUnix = $githooksDir -replace '\\', '/'
+  git config --global core.hooksPath $githooksUnix
+}
+
 # Git baseline if missing
 if (-not (Test-Path (Join-Path $HOME ".gitconfig"))) {
   git config --global credential.helper manager
