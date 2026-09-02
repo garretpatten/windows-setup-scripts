@@ -2,7 +2,7 @@
 . "$PSScriptRoot/utils.ps1"
 
 # Core toolchain
-'node','python312','gh','neovim','docker','srccli','semgrep','shellcheck','nvm' |
+'node','python312','go','gh','neovim','docker','srccli','semgrep','shellcheck','nvm' |
   ForEach-Object { Install-Pkg $_ }
 
 # VS Code
