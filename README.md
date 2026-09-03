@@ -8,13 +8,13 @@ These scripts install CLI tools, developer runtimes, security software, producti
 
 ## Requirements
 
-- **Windows 11** with latest updates  
-- **PowerShell 7+** (install via [Microsoft Store](https://apps.microsoft.com/detail/9MZ1SNWT0N5D) or `winget install -e --id Microsoft.PowerShell`)  
+- **Windows 11** with latest updates
+- **PowerShell 7+** (install via [Microsoft Store](https://apps.microsoft.com/detail/9MZ1SNWT0N5D) or `winget install -e --id Microsoft.PowerShell`)
 - **winget** package manager (ships with Windows 11)
 
 Optional:
 
-- **WSL** (for Linux tooling, zsh, tmux, etc.) — `wsl --install`  
+- **WSL** (for Linux tooling, zsh, tmux, etc.) — `wsl --install`
 - **npm** (for Angular CLI, tree-sitter-cli) — comes with Node.js install
 
 ---
@@ -48,7 +48,8 @@ Run with `-WithWSL` to also install WSL + Ubuntu.
 
 - `cli.ps1` — Core CLI tools (git, ripgrep, fd, bat, eza, jq, fzf, zoxide, btop, fastfetch, lazygit, lazydocker, yazi, etc.)
 - `dev.ps1` — Developer runtimes and IDEs (node, go, python, gh, neovim, docker, src-cli, semgrep, cursor, rustup, ollama, ruby, VS Code). Configures Git, VS Code settings, Neovim packer, and language servers.
-- `web.ps1` — Browsers and API clients (brave, duckduckgo, bruno)
+- `web.ps1` — Browsers and API clients (Brave, Google Chrome, DuckDuckGo,
+  Bruno)
 - `media.ps1` — Media apps (spotify, vlc, ffmpeg)
 - `productivity.ps1` — Productivity apps (chatgpt, notion, protondrive, zoom, flameshot, keepassxc, libreoffice, etcher)
 - `security.ps1` — Security/networking (1Password, 1Password CLI, nmap, openvpn, burp, zap, protonvpn, protonpass, signal, exiftool)
@@ -81,7 +82,7 @@ Remove created folders manually if not needed.
 
 [@garretpatten](https://github.com/garretpatten/)
 
-*For questions, bug reports, or feature requests, please open an issue on this repository or contact the maintainer directly.*
+_For questions, bug reports, or feature requests, please open an issue on this repository or contact the maintainer directly._
 
 ## License
 

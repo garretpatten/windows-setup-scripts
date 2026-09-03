@@ -75,6 +75,7 @@ $Global:Pkg = @{
 
   # GUI / browsers / media
   brave            = @{ Id='Brave.Brave' }
+  chrome           = @{ Id='Google.Chrome' }
   ddg              = @{ Id='DuckDuckGo.DesktopBrowser' }
   vlc              = @{ Id='VideoLAN.VLC' }
   spotify          = @{ Id='Spotify.Spotify' }
