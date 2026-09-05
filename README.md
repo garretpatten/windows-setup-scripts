@@ -1,89 +1,119 @@
-# Windows Setup Scripts
+# Windows setup scripts
 
-Automated Windows 11 environment bootstrap using PowerShell and `winget`.
+Provisioning for a personal Windows 11 desktop: install scripts under
+`src/scripts/install/`, dotfiles and system config under `src/scripts/config/`,
+orchestrated by `master.ps1`. Mirrors the layout and app set of
+[ubuntu-setup-scripts](https://github.com/garretpatten/ubuntu-setup-scripts).
 
-These scripts install CLI tools, developer runtimes, security software, productivity apps, and create a consistent folder structure. They are designed for repeatable workstation setup on fresh Windows systems.
-
----
-
-## Requirements
-
-- **Windows 11** with latest updates
-- **PowerShell 7+** (install via [Microsoft Store](https://apps.microsoft.com/detail/9MZ1SNWT0N5D) or `winget install -e --id Microsoft.PowerShell`)
-- **winget** package manager (ships with Windows 11)
-
-Optional:
-
-- **WSL** (for Linux tooling, zsh, tmux, etc.) — `wsl --install`
-- **npm** (for Angular CLI, tree-sitter-cli) — comes with Node.js install
-
----
-
-## Usage
-
-Clone the repo and initialize submodules for `dotfiles`:
-
-```powershell
-git clone https://github.com/<your-username>/windows-setup-scripts.git
-cd windows-setup-scripts
-git submodule update --init --recursive
+```bash
+npm run all             # install + config
+npm run install:cli     # CLI-only install
+npm run install:all     # full install (CLI + desktop)
+npm run config          # config only (ensures submodules are up to date)
 ```
 
-Run the master script:
+Direct PowerShell equivalents (from `src/scripts/`):
 
 ```powershell
-cd src/scripts
 pwsh ./master.ps1
+pwsh ./run-install.ps1 cli
+pwsh ./run-install.ps1 all
+pwsh ./run-config.ps1
 ```
 
-By default, `master.ps1` runs all category scripts. Use flags to skip:
+CI runs four jobs on `windows-latest`:
 
-```powershell
-pwsh ./master.ps1 -SkipMedia -SkipProductivity
-```
+- `test-cli`: `run-install.ps1 cli` → `validate-installs-cli.ps1`
+- `test-config`: `run-config.ps1` → `validate-config-only.ps1`
+- `test-full`: `run-install.ps1 all` → `validate-installs.ps1`
+- `test-master`: `master.ps1` → `validate.ps1` (full installs + config)
 
-Run with `-WithWSL` to also install WSL + Ubuntu.
+Each validation script confirms the expected binaries/packages and config outcomes
+for that run mode.
 
-## Script Categories
+## Package manager preference
 
-- `cli.ps1` — Core CLI tools (git, ripgrep, fd, bat, eza, jq, fzf, zoxide, btop, fastfetch, lazygit, lazydocker, yazi, etc.)
-- `dev.ps1` — Developer runtimes and IDEs (node, go, python, gh, neovim, docker, src-cli, semgrep, cursor, rustup, ollama, ruby, VS Code). Configures Git, VS Code settings, Neovim packer, and language servers.
-- `web.ps1` — Browsers and API clients (Brave, Google Chrome, DuckDuckGo,
-  Bruno)
-- `media.ps1` — Media apps (spotify, vlc, ffmpeg)
-- `productivity.ps1` — Productivity apps (chatgpt, notion, protondrive, zoom, flameshot, keepassxc, libreoffice, etcher)
-- `security.ps1` — Security/networking (1Password, 1Password CLI, nmap, openvpn, burp, zap, protonvpn, protonpass, signal, exiftool)
-- `shell.ps1` — Windows Terminal, Oh My Posh; Ghostty/tmux/zsh are WSL-only
-- `wsl.ps1` — Installs WSL + Ubuntu 24.04, suggests installing zsh and tmux inside
-- `dotfiles.ps1` — Symlinks `src/dotfiles/config/<app>/` dirs and copies home/VS Code settings
-- `organizeHome.ps1` — Creates standard folders (Code, Tools, Security, Media, tmp, Hacking, Projects)
+Each app uses one install path:
 
-## Notes
+1. **winget** when the package is available (preferred)
+2. **Microsoft Store via winget** when that is the published channel
+3. **Upstream binary / installer** only when neither applies (pass-cli, some fonts)
 
-- Fonts: Fonts: Nerd Fonts (Meslo, Hack) are not reliably distributed via winget. Install manually from [Nerd Fonts releases](https://www.nerdfonts.com/).
-- Tree-sitter CLI and Angular CLI are installed via npm globally.
-- ShellCheck is available via winget but most advanced shell tooling is better run inside WSL.
-- Some GUI apps (ChatGPT, Spotify) come from the Microsoft Store; the scripts handle this with `-s msstore`.
+## Install layout
 
-## Example One-Shot Setup
+| Path                          | Role                                                                  |
+| ----------------------------- | --------------------------------------------------------------------- |
+| `install/preflight/`          | winget source update, essentials (Git, PowerShell), timezone          |
+| `install/all.ps1`             | Full install orchestrator (`--cli` for CLI-only mode)                 |
+| `install/cli.ps1`             | Thin wrapper that runs `install/all.ps1 --cli`                        |
+| `install/packages/*.packages` | One winget package ID per line; installed by `install/all.ps1`        |
+| `install/store-apps.txt`      | Extra desktop apps (Zoom, ZAP) installed by `install/apps/store-apps` |
+| `install/apps/`               | App-specific installers (Chrome, Etcher, Proton, pass-cli, clones)    |
+| `install/dev/`                | nvm, LSP stacks, rustup, gems, npm tools, Cursor Agent, Ollama        |
+| `install/shell/`              | Ghostty (best-effort), Meslo font, Oh My Posh                         |
+| `install/post-install/`       | cleanup, Docker service, tldr cache, completion banner                |
 
-```powershell
-pwsh ./master.ps1 -WithWSL
-```
+### Validation scripts (`scripts/`)
 
-This installs everything, plus WSL and Ubuntu, then organizes your home folders.
+| Script                      | Use with                                    |
+| --------------------------- | ------------------------------------------- |
+| `validate-installs-cli.ps1` | After `run-install.ps1 cli`                 |
+| `validate-installs.ps1`     | After `run-install.ps1 all` or `master.ps1` |
+| `validate-config-only.ps1`  | After `run-config.ps1`                      |
+| `validate-config.ps1`       | After `master.ps1` or full install + config |
+| `validate.ps1`              | After `master.ps1` (installs + config)      |
 
-## Uninstall/Cleanup
+### Package lists (`install/packages/`)
 
-Uninstall apps via `winget uninstall --id <PackageId>` or Windows Settings > Apps.
-Remove created folders manually if not needed.
+| File                           | Contents                                                          |
+| ------------------------------ | ----------------------------------------------------------------- |
+| `base.packages`                | CLI and security tools (bat, fzf, gh, jq, ripgrep, tldr, nmap, …) |
+| `shell.packages`               | Windows Terminal, Oh My Posh                                      |
+| `media.packages`               | VLC, FFmpeg                                                       |
+| `desktop.packages`             | Reserved (no GNOME equivalents)                                   |
+| `productivity.packages`        | LibreOffice, KeePassXC, Flameshot, Notion                         |
+| `lsp.packages`                 | Go, Ruby, OpenJDK, Lua language server                            |
+| `lsp-optional.packages`        | Optional language runtimes                                        |
+| `dev.packages`                 | Neovim, Python                                                    |
+| `third-party-cli.packages`     | Docker Desktop (optional); Node.js LTS installed in `all.ps1`         |
+| `third-party-desktop.packages` | Brave, Bruno, Signal                                              |
 
-## Maintainers
+### Apps (`install/apps/`)
 
-[@garretpatten](https://github.com/garretpatten/)
+Brave, Chrome, Signal, Proton VPN/Pass, Bruno, Zoom, Etcher, OWASP ZAP,
+Hacking git clones — each script handles its own winget ID or binary when lists
+are not enough.
 
-_For questions, bug reports, or feature requests, please open an issue on this repository or contact the maintainer directly._
+### Development (`install/dev/`)
 
-## License
+Node.js, nvm, Docker Desktop, rustup, Solargraph gem, Semgrep, Vue CLI, Cursor
+Agent CLI, Ollama, language servers.
 
-This project is licensed under the [MIT License](./LICENSE).
+### Preflight & post-install
+
+- winget source update, Git/PowerShell essentials, timezone (Eastern when UTC)
+- Docker service start attempt; firewall rules in `config/security/` (LocalSend)
+
+## Explicitly not installed
+
+These are **not** provisioned by this repo (remove from old notes if you still
+expect them):
+
+| Removed / never included                    | Notes                                                         |
+| ------------------------------------------- | ------------------------------------------------------------- |
+| **Postman**                                 | Replaced by **Bruno**                                         |
+| **Sourcegraph CLI (`sg`)**                  | Removed; use Bruno or other tooling                           |
+| **Spotify**                                 | Not provisioned; install manually if needed                   |
+| Full IDE bundles (VS Code, JetBrains, etc.) | Dotfiles may reference extensions; install editors separately |
+| 1Password, Bitwarden, etc.                  | Use Proton Pass / KeePassXC paths above                       |
+| DuckDuckGo Desktop, ChatGPT Store           | Not provisioned; install manually if needed                   |
+
+## Configuration (`src/scripts/config/`)
+
+Symlinks and settings from `src/dotfiles` (submodule, read-only): `config/dotfiles.ps1`
+symlinks each `config/<app>/` tree under `%LOCALAPPDATA%` or `%APPDATA%`; copies for
+shell home files and VS Code settings. Covers Neovim, btop, fastfetch, terminals,
+Git Credential Manager, Windows UI prefs (skipped in CI without a desktop session),
+firewall rules (LocalSend), home directory layout.
+
+See [AGENTS.md](AGENTS.md) for contributor conventions, PSScriptAnalyzer, and CI details.

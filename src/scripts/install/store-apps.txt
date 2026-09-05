@@ -1,0 +1,5 @@
+# Extra desktop apps installed via winget (name is winget id).
+# Format: Id [Source]
+
+Zoom.Zoom
+ZAP.ZAP
