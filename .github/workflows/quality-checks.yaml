@@ -26,7 +26,9 @@ jobs:
 
       - name: Install PSScriptAnalyzer
         shell: pwsh
-        run: Install-Module PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
+        run: >
+          Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
+          -SkipPublisherCheck
 
       - name: Run PSScriptAnalyzer on changed files
         shell: pwsh

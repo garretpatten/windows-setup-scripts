@@ -3,6 +3,8 @@
 $ErrorActionPreference = 'Stop'
 Set-Location (Join-Path $PSScriptRoot '..')
 
+$settings = Join-Path (Get-Location) 'PSScriptAnalyzerSettings.psd1'
+
 git fetch origin main master 2>$null | Out-Null
 if (git show-ref --verify --quiet refs/remotes/origin/master) {
     $base = 'origin/master'
@@ -16,7 +18,7 @@ $changed = git diff --name-only --diff-filter=ACMR "$base...HEAD" |
     Where-Object { $_ -match '\.ps1$' -and (Test-Path $_) }
 
 if (-not $changed) {
-    Write-Host "No changed PowerShell files to check (base: $base)"
+    Write-Output "No changed PowerShell files to check (base: $base)"
     exit 0
 }
 
@@ -24,13 +26,13 @@ if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) {
     Install-Module PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
 }
 
-Write-Host "PSScriptAnalyzer ($($changed.Count) files, base: $base)"
+Write-Output "PSScriptAnalyzer ($($changed.Count) files, base: $base)"
 $issues = @()
 foreach ($file in $changed) {
-    $issues += Invoke-ScriptAnalyzer -Path $file -Severity Warning, Error
+    $issues += Invoke-ScriptAnalyzer -Path $file -Settings $settings -Severity Warning, Error
 }
 if ($issues) {
-    $issues | Format-Table -AutoSize
+    $issues | Format-Table -AutoSize | Out-String | Write-Output
     exit 1
 }
-Write-Host 'PSScriptAnalyzer passed.'
+Write-Output 'PSScriptAnalyzer passed.'

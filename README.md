@@ -71,7 +71,7 @@ Each app uses one install path:
 | `shell.packages`               | Windows Terminal, Oh My Posh                                      |
 | `media.packages`               | VLC, FFmpeg                                                       |
 | `desktop.packages`             | Reserved (no GNOME equivalents)                                   |
-| `productivity.packages`        | LibreOffice, KeePassXC, Flameshot                                 |
+| `productivity.packages`        | LibreOffice, KeePassXC, Flameshot, Notion                         |
 | `lsp.packages`                 | Go, Ruby, OpenJDK, Lua language server                            |
 | `lsp-optional.packages`        | Optional language runtimes                                        |
 | `dev.packages`                 | Neovim, Python                                                    |
@@ -106,7 +106,7 @@ expect them):
 | **Spotify**                                 | Not provisioned; install manually if needed                   |
 | Full IDE bundles (VS Code, JetBrains, etc.) | Dotfiles may reference extensions; install editors separately |
 | 1Password, Bitwarden, etc.                  | Use Proton Pass / KeePassXC paths above                       |
-| DuckDuckGo Desktop, Notion, ChatGPT Store   | Not in the Ubuntu mirror set                                  |
+| DuckDuckGo Desktop, ChatGPT Store           | Not provisioned; install manually if needed                   |
 
 ## Configuration (`src/scripts/config/`)
 

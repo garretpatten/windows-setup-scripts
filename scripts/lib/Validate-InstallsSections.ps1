@@ -40,6 +40,7 @@ function Assert-Productivity {
     Test-WingetId 'libreoffice' 'TheDocumentFoundation.LibreOffice'
     Test-WingetId 'keepassxc' 'KeePassXCTeam.KeePassXC'
     Test-WingetId 'flameshot' 'Flameshot.Flameshot'
+    Test-WingetId 'notion' 'Notion.Notion'
 }
 
 function Assert-StoreApps {

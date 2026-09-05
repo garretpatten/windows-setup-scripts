@@ -12,12 +12,15 @@ try {
         -OutFile $zip -UseBasicParsing
     Expand-Archive -LiteralPath $zip -DestinationPath $temp -Force
     Get-ChildItem -Path $temp -Include *.ttf, *.otf -Recurse | ForEach-Object {
-        $dest = Join-Path $fontsDir $_.Name
-        Copy-Item $_.FullName $dest -Force
+        $fontFile = $_
+        $dest = Join-Path $fontsDir $fontFile.Name
+        Copy-Item $fontFile.FullName $dest -Force
         try {
             New-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts' `
-                -Name $_.Name -Value $dest -PropertyType String -Force -ErrorAction SilentlyContinue | Out-Null
-        } catch {}
+                -Name $fontFile.Name -Value $dest -PropertyType String -Force -ErrorAction Stop | Out-Null
+        } catch {
+            Write-Warning "Font registry entry skipped for $($fontFile.Name): $_"
+        }
     }
 } catch {
     Write-Warning "Meslo Nerd Font install failed: $_"

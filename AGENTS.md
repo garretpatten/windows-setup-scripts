@@ -36,13 +36,15 @@ From the repository root:
 pwsh ./scripts/check-pssa.ps1
 ```
 
-That runs PSScriptAnalyzer on **changed** `*.ps1` files vs `origin/master`.
+That runs PSScriptAnalyzer on **changed** `*.ps1` files vs `origin/master`, using
+`PSScriptAnalyzerSettings.psd1` (excludes progress-output and naming rules that do not
+fit Omarchy-style provisioning scripts).
 
 To lint all setup scripts locally:
 
 ```powershell
 Install-Module PSScriptAnalyzer -Scope CurrentUser -Force
-Invoke-ScriptAnalyzer -Path src/scripts -Recurse -Severity Warning,Error
+Invoke-ScriptAnalyzer -Path src/scripts -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
 ```
 
 ### PowerShell conventions

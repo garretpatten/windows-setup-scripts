@@ -7,7 +7,8 @@ body:
   - type: markdown
     attributes:
       value: >-
-        Give **Windows version**, **repro**, and `./scripts/validate.ps1` output.
+        Give **Windows version**, **repro**, and
+        `./scripts/validate.ps1` output.
         Read **CONTRIBUTING.md** before submitting.
 
   - type: textarea
@@ -23,8 +24,8 @@ body:
     attributes:
       label: Reproduction steps
       description: >
-        Commands and entrypoint (`master.ps1`, `run-install.ps1`, `run-config.ps1`,
-        or a single category script path).
+        Commands and entrypoint (`master.ps1`, `run-install.ps1`,
+        `run-config.ps1`, or a single category script path).
       placeholder: |
         pwsh ./src/scripts/master.ps1
         …
@@ -35,7 +36,8 @@ body:
     id: environment
     attributes:
       label: Windows and environment
-      description: Windows 11 build, headless windows-latest CI, or Desktop, etc.
+      description: >
+        Windows 11 build, headless windows-latest CI, or Desktop, etc.
       placeholder: |-
         Windows 11 24H2, headless windows-latest CI, or Desktop, etc.
     validations:
