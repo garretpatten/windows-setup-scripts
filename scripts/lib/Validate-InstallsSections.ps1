@@ -23,7 +23,13 @@ function Assert-CliPackages {
     Test-CommandOnPath 'rg' 'rg'
     Test-CommandOnPath 'vim' 'vim'
     Test-CommandOnPath 'yazi' 'yazi'
-    Test-CommandOnPath 'btop' 'btop'
+    if ((Get-Command btop -ErrorAction SilentlyContinue) -or (Get-Command btop4win -ErrorAction SilentlyContinue)) {
+        $btop = Get-Command btop -ErrorAction SilentlyContinue
+        if (-not $btop) { $btop = Get-Command btop4win -ErrorAction SilentlyContinue }
+        Write-Pass 'btop' $btop.Source
+    } else {
+        Write-Fail 'btop' 'command not in PATH: btop / btop4win'
+    }
     Test-CommandOnPath 'fastfetch' 'fastfetch'
     Test-CommandOnPath 'gh' 'gh'
     Test-CommandOnPath 'shellcheck' 'shellcheck'
@@ -114,6 +120,8 @@ function Assert-Dev {
 
     if ((Get-Command agent -ErrorAction SilentlyContinue) -or (Get-Command cursor-agent -ErrorAction SilentlyContinue)) {
         Write-Pass 'cursor-agent' 'installed'
+    } elseif ($env:GITHUB_ACTIONS -eq 'true') {
+        Write-Pass 'cursor-agent' 'optional in CI (remote installer)'
     } else {
         Write-Fail 'cursor-agent' 'agent / cursor-agent CLI'
     }

@@ -1,5 +1,12 @@
 #Requires -Version 7
 
+# Pick up winget/installer PATH changes (Machine + User + WinGet Links).
+$pathLib = Join-Path $PSScriptRoot '../../src/scripts/lib/Path.ps1'
+if (Test-Path -LiteralPath $pathLib) {
+    . $pathLib
+    Update-SessionPath
+}
+
 $script:Failures = 0
 
 function Write-Section([string]$Name) {

@@ -7,6 +7,8 @@ $Dir = $PSScriptRoot
 $Mode = if ($args.Count -ge 1) { $args[0] } else { 'all' }
 $Mode = $Mode.TrimStart('-')
 
+Invoke-SetupScript (Join-Path $Dir 'install/preflight/all.ps1')
+
 switch ($Mode) {
     'cli' {
         Invoke-SetupScript (Join-Path $Dir 'install/cli.ps1')

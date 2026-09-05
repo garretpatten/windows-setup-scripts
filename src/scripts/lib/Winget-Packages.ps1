@@ -1,4 +1,5 @@
 #Requires -Version 7
+. (Join-Path $PSScriptRoot 'Path.ps1')
 
 function Test-WingetInstalled {
     param([Parameter(Mandatory)][string]$Id)
@@ -13,19 +14,26 @@ function Install-WingetPackage {
     )
     if (Test-WingetInstalled -Id $Id) {
         Write-Host "[INFO] $Id already installed"
+        Update-SessionPath
         return
     }
     $wingetArgs = @(
         'install', '-e', '--id', $Id,
-        '--silent', '--accept-package-agreements', '--accept-source-agreements'
+        '--silent', '--disable-interactivity',
+        '--accept-package-agreements', '--accept-source-agreements'
     )
     if ($Source) { $wingetArgs += @('-s', $Source) }
     Write-Host "[INFO] winget $($wingetArgs -join ' ')"
     try {
         winget @wingetArgs
+        # 0 = ok; -1978335189 (0x8A15002B) = already installed
+        if ($LASTEXITCODE -and $LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
+            Write-Warning "winget install failed for ${Id} (exit $LASTEXITCODE)"
+        }
     } catch {
         Write-Warning "winget install failed for ${Id}: $_"
     }
+    Update-SessionPath
 }
 
 function Get-PackagesFromFile {

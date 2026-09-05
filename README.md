@@ -75,7 +75,7 @@ Each app uses one install path:
 | `lsp.packages`                 | Go, Ruby, OpenJDK, Lua language server                            |
 | `lsp-optional.packages`        | Optional language runtimes                                        |
 | `dev.packages`                 | Neovim, Python                                                    |
-| `third-party-cli.packages`     | Docker Desktop, Node.js LTS                                       |
+| `third-party-cli.packages`     | Docker Desktop (optional); Node.js LTS installed in `all.ps1`         |
 | `third-party-desktop.packages` | Brave, Bruno, Signal                                              |
 
 ### Apps (`install/apps/`)

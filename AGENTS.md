@@ -94,7 +94,7 @@ Docker Desktop checks are soft in CI when Docker is unavailable.
 | `src/scripts/install/all.ps1`                               | Full install orchestrator (`--cli` for CLI-only)        |
 | `src/scripts/install/cli.ps1`                               | Wrapper that runs `install/all.ps1 --cli`               |
 | `src/scripts/install/packages/*.packages`                   | Winget package ID lists (one per line)                  |
-| `src/scripts/install/packages/third-party-cli.packages`     | Docker Desktop / Node.js for CLI install                |
+| `src/scripts/install/packages/third-party-cli.packages`     | Docker Desktop (optional) for CLI install               |
 | `src/scripts/install/packages/third-party-desktop.packages` | Brave / Bruno / Signal for full install                 |
 | `src/scripts/install/apps/pass-cli.ps1`                     | Proton Pass CLI binary install                          |
 | `src/scripts/lib/Winget-Packages.ps1`                       | `Install-WingetPackagesFromFile` helper                 |

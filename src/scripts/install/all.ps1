@@ -4,31 +4,31 @@ $Dir = $PSScriptRoot
 . (Join-Path $Dir '../lib/Env.ps1')
 . (Join-Path $Dir '../lib/Run.ps1')
 . (Join-Path $Dir '../lib/Winget-Packages.ps1')
+. (Join-Path $Dir '../lib/Path.ps1')
 . (Join-Path $Dir '../lib/Parallel.ps1')
 
 $InstallMode = if ($args.Count -ge 1) { $args[0] } else { 'all' }
 $InstallMode = $InstallMode.TrimStart('-')
 function Test-IsDesktop { $InstallMode -ne 'cli' }
 
-$AsyncScripts = @(
-    'dev/nvm.ps1'
-    'dev/rustup.ps1'
+# Non-winget work that is safe to parallelize.
+$ParallelScripts = @(
     'dev/cursor-cli.ps1'
-    'dev/ollama.ps1'
-    'dev/semgrep.ps1'
     'dev/ruby-gems.ps1'
-    'dev/vue-cli.ps1'
     'dev/language-servers.ps1'
-    'dev/go.ps1'
-    'shell/ghostty.ps1'
     'shell/meslo-nerd-font.ps1'
-    'shell/oh-my-posh.ps1'
     'apps/hacking-repos.ps1'
 )
 
-if (Test-IsDesktop) {
-    $AsyncScripts += 'apps/store-apps.ps1'
-}
+# Extra winget installs not covered by packages/*.packages (must stay sequential —
+# winget does not support concurrent installs).
+$WingetExtraScripts = @(
+    'dev/nvm.ps1'
+    'dev/rustup.ps1'
+    'dev/ollama.ps1'
+    'dev/semgrep.ps1'
+    'shell/ghostty.ps1'
+)
 
 $DesktopScripts = @(
     'apps/chrome.ps1'
@@ -64,24 +64,40 @@ Write-Host '==> Installing third-party packages...'
 if (Test-IsDesktop) {
     Install-WingetPackagesFromFile (Join-Path $Dir 'packages/third-party-desktop.packages') -Optional
 }
+# Node.js LTS is required for npm global tools; Docker Desktop stays optional.
+Install-WingetPackage -Id 'OpenJS.NodeJS.LTS'
 Install-WingetPackagesFromFile (Join-Path $Dir 'packages/third-party-cli.packages') -Optional
+
+Write-Host '==> Installing extra winget tools (sequential)...'
+foreach ($rel in $WingetExtraScripts) {
+    Invoke-SetupScript (Join-Path $Dir $rel)
+}
+Update-SessionPath
 
 Write-Host '==> Initializing asynchronous downloads...'
 $jobs = @()
-foreach ($rel in $AsyncScripts) {
+foreach ($rel in $ParallelScripts) {
     $jobs += Start-SetupJobBestEffort (Join-Path $Dir $rel)
 }
 Wait-SetupJobsBestEffort -Label 'asynchronous tasks' -Jobs $jobs
 Write-Host '==> Asynchronous tasks completed.'
 
+# Vue CLI needs node/npm on PATH (after Node LTS / nvm).
+Update-SessionPath
+Invoke-SetupScript (Join-Path $Dir 'dev/vue-cli.ps1')
+
 if (Test-IsDesktop) {
-    Write-Host '==> Installing desktop apps...'
-    $djobs = @()
+    Write-Host '==> Installing store / extra apps...'
+    Invoke-SetupScript (Join-Path $Dir 'apps/store-apps.ps1')
+
+    Write-Host '==> Installing desktop apps (sequential winget)...'
     foreach ($rel in $DesktopScripts) {
-        $djobs += Start-SetupJobBestEffort (Join-Path $Dir $rel)
+        Invoke-SetupScript (Join-Path $Dir $rel)
     }
-    Wait-SetupJobsBestEffort -Label 'desktop app install' -Jobs $djobs
 }
 
 Invoke-SetupScript (Join-Path $Dir 'apps/pass-cli.ps1')
 Invoke-SetupScript (Join-Path $Dir 'post-install/all.ps1')
+
+Update-SessionPath
+Export-PathForGitHubActions

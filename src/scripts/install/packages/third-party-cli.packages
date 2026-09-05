@@ -1,4 +1,4 @@
-# Third-party CLI/server tools.
+# Third-party CLI/server tools (optional — Docker Desktop often fails headless).
+# Node.js LTS is installed separately as a required package in install/all.ps1.
 
 Docker.DockerDesktop
-OpenJS.NodeJS.LTS
