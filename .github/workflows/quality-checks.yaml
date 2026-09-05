@@ -1,0 +1,33 @@
+---
+name: 'Quality Checks'
+
+on: [pull_request]
+
+jobs:
+  quality-checks:
+    name: 'Linters'
+    # yamllint disable-line rule:line-length
+    uses: garretpatten/quality-checks/.github/workflows/quality-checks.yaml@master
+    with:
+      markdownlint_run: true
+      prettier_run: true
+      shellcheck_run: false
+      yamllint_run: true
+    secrets: inherit
+
+  psscriptanalyzer:
+    name: 'PSScriptAnalyzer'
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: Install-Module PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
+
+      - name: Run PSScriptAnalyzer on changed files
+        shell: pwsh
+        run: ./scripts/check-pssa.ps1

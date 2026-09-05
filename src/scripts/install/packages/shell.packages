@@ -1,0 +1,4 @@
+# Native Windows shell tooling (zsh/tmux live in WSL if desired).
+
+Microsoft.WindowsTerminal
+JanDeDobbeleer.OhMyPosh

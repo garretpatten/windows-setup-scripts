@@ -1,0 +1,51 @@
+---
+name: Bug report
+description: Incorrect behavior during or after provisioning
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Give **Windows version**, **repro**, and `./scripts/validate.ps1` output.
+        Read **CONTRIBUTING.md** before submitting.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Expected vs actual
+      description: What should happen versus what occurred.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: >
+        Commands and entrypoint (`master.ps1`, `run-install.ps1`, `run-config.ps1`,
+        or a single category script path).
+      placeholder: |
+        pwsh ./src/scripts/master.ps1
+        …
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Windows and environment
+      description: Windows 11 build, headless windows-latest CI, or Desktop, etc.
+      placeholder: |-
+        Windows 11 24H2, headless windows-latest CI, or Desktop, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (optional but helpful)
+      description: Relevant `./scripts/validate.ps1` output or CI URL.
+      render: plaintext
+    validations:
+      required: false
