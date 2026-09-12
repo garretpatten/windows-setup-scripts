@@ -16,26 +16,35 @@ if (-not $nvmHome) {
     Update-SessionPath
     $nvmHome = $candidateHomes | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 }
-
-$nvmExe = if ($nvmHome) { Join-Path $nvmHome 'nvm.exe' } else { $null }
-$nvmCmd = Get-Command nvm -ErrorAction SilentlyContinue
-if (-not $nvmCmd -and $nvmExe -and (Test-Path -LiteralPath $nvmExe)) {
-    $env:Path = "$nvmHome;$env:Path"
-    $nvmCmd = Get-Command nvm -ErrorAction SilentlyContinue
+if (-not $nvmHome) {
+    Write-Warning 'nvm home not found after install (continuing)'
+    return
 }
 
-# Only let nvm provision Node when nothing else provides it: `nvm use` replaces
-# the nodejs symlink, which would clobber an existing Node installation.
-if ($nvmCmd -and -not (Get-Command node -ErrorAction SilentlyContinue)) {
+if (-not (Get-Command nvm -ErrorAction SilentlyContinue)) {
+    $env:Path = "$nvmHome;$env:Path"
+}
+
+# Only let nvm provision Node when nothing else provides it: nvm manages its own
+# NVM_SYMLINK location and would otherwise shadow an existing Node install.
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
     try {
         # nvm-windows accepts a version or "latest" (not the bash "lts" alias).
         nvm install latest
         nvm use latest
         Update-SessionPath
-        if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
-            Write-Warning 'nvm installed but node is still not on PATH (continuing)'
-        }
     } catch {
         Write-Warning "nvm node install failed (continuing): $_"
     }
+}
+
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+    # Fallback: plain Node LTS via winget (--force repairs broken ARP entries).
+    Write-Warning 'node still missing after nvm; installing Node LTS via winget'
+    Install-WingetPackage -Id 'OpenJS.NodeJS.LTS' -Force
+    Update-SessionPath
+}
+
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+    Write-Warning 'node is still not on PATH after nvm and Node LTS fallback'
 }

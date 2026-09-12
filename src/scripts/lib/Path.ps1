@@ -20,11 +20,26 @@ function Test-PathListContains {
     return $false
 }
 
+function Expand-PathEnvRefs {
+    # Installers like nvm-windows append literal %VAR% references to PATH as
+    # REG_EXPAND_SZ; .NET cannot expand them unless the vars are in-process.
+    param([string]$Entry)
+    if (-not $Entry -or ($Entry -notmatch '%')) { return $Entry }
+    return [regex]::Replace($Entry, '%([^%]+)%', {
+        param($match)
+        $name = $match.Groups[1].Value
+        $value = [Environment]::GetEnvironmentVariable($name, 'Machine')
+        if (-not $value) { $value = [Environment]::GetEnvironmentVariable($name, 'User') }
+        if ($value) { $value } else { $match.Value }
+    })
+}
+
 function Update-SessionPath {
     $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
     $user = [Environment]::GetEnvironmentVariable('Path', 'User')
     $entries = [System.Collections.Generic.List[string]]::new()
     foreach ($part in @(Get-PathEntries $machine) + @(Get-PathEntries $user)) {
+        $part = Expand-PathEnvRefs $part
         if (-not (Test-PathListContains -List $entries -Candidate $part)) {
             $entries.Add($part) | Out-Null
         }
@@ -65,7 +80,10 @@ function Export-PathForGitHubActions {
     Update-SessionPath
     $user = [Environment]::GetEnvironmentVariable('Path', 'User')
     $dirs = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-    foreach ($part in @(Get-PathEntries $user)) { [void]$dirs.Add($part) }
+    foreach ($part in @(Get-PathEntries $user)) {
+        $part = Expand-PathEnvRefs $part
+        if ($part) { [void]$dirs.Add($part) }
+    }
 
     $programFilesX86 = [Environment]::GetEnvironmentVariable('ProgramFiles(x86)')
     $known = @(

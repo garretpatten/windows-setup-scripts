@@ -10,9 +10,10 @@ function Test-WingetInstalled {
 function Install-WingetPackage {
     param(
         [Parameter(Mandatory)][string]$Id,
-        [string]$Source = ''
+        [string]$Source = '',
+        [switch]$Force
     )
-    if (Test-WingetInstalled -Id $Id) {
+    if (-not $Force -and (Test-WingetInstalled -Id $Id)) {
         Write-Host "[INFO] $Id already installed"
         Update-SessionPath
         return
@@ -22,6 +23,7 @@ function Install-WingetPackage {
         '--silent', '--disable-interactivity',
         '--accept-package-agreements', '--accept-source-agreements'
     )
+    if ($Force) { $wingetArgs += '--force' }
     if ($Source) { $wingetArgs += @('-s', $Source) }
     Write-Host "[INFO] winget $($wingetArgs -join ' ')"
     # Transient source/download failures are common in CI; retry before giving up.
