@@ -1,0 +1,97 @@
+---
+name: 'Test Runner'
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  test-cli:
+    name: 'CLI-only install'
+    runs-on: windows-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Run CLI-only install
+        shell: pwsh
+        run: |
+          Set-Location src/scripts
+          ./run-install.ps1 cli
+
+      - name: Validate CLI installs
+        shell: pwsh
+        run: ./scripts/validate-installs-cli.ps1
+
+  test-config:
+    name: 'Configuration run'
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Run configuration
+        shell: pwsh
+        run: |
+          Set-Location src/scripts
+          ./run-config.ps1
+
+      - name: Validate config-only outcomes
+        shell: pwsh
+        run: ./scripts/validate-config-only.ps1
+
+  test-full:
+    name: 'Full install'
+    runs-on: windows-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Run full install
+        shell: pwsh
+        run: |
+          Set-Location src/scripts
+          ./run-install.ps1 all
+
+      - name: Validate full installs
+        shell: pwsh
+        run: ./scripts/validate-installs.ps1
+
+  test-master:
+    name: 'Master (install + config)'
+    runs-on: windows-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      # CI: no interactive desktop; windows-settings.ps1 exits early.
+      - name: Run setup scripts
+        shell: pwsh
+        run: |
+          Set-Location src/scripts
+          ./master.ps1
+
+      - name: Validate installs and config
+        shell: pwsh
+        run: ./scripts/validate.ps1

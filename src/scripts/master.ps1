@@ -1,36 +1,16 @@
 #Requires -Version 7
-param(
-  [switch]$SkipCLI,
-  [switch]$SkipDev,
-  [switch]$SkipWeb,
-  [switch]$SkipMedia,
-  [switch]$SkipProductivity,
-  [switch]$SkipSecurity,
-  [switch]$SkipShell,
-  [switch]$SkipDotfiles,
-  [switch]$WithWSL
-)
+$ErrorActionPreference = 'Continue'
+$Dir = $PSScriptRoot
+. (Join-Path $Dir 'lib/Env.ps1')
+. (Join-Path $Dir 'lib/Run.ps1')
+. (Join-Path $Dir 'lib/Git-Submodules.ps1')
 
-$ErrorActionPreference = 'Stop'
-$root = Split-Path -Parent $MyInvocation.MyCommand.Path
-Set-Location $root
+Ensure-SubmodulesSynced -Root $env:PROJECT_ROOT
 
-function Run($name) {
-  $path = Join-Path $root $name
-  Write-Host "`n=== $name ==="
-  & pwsh $path
-  if ($LASTEXITCODE) { throw "Step failed: $name" }
-}
-
-if (-not $SkipCLI)          { Run 'cli.ps1' }
-if (-not $SkipDev)          { Run 'dev.ps1' }
-if (-not $SkipWeb)          { Run 'web.ps1' }
-if (-not $SkipMedia)        { Run 'media.ps1' }
-if (-not $SkipProductivity) { Run 'productivity.ps1' }
-if (-not $SkipSecurity)     { Run 'security.ps1' }
-if (-not $SkipShell)        { Run 'shell.ps1' }
-if ($WithWSL)               { Run 'wsl.ps1' }
-
-if (-not $SkipDotfiles)     { Run 'dotfiles.ps1' }
-Run 'organizeHome.ps1'
-
+Invoke-SetupScript (Join-Path $Dir 'install/preflight/all.ps1')
+Invoke-SetupScript (Join-Path $Dir 'config/system/all.ps1')
+Invoke-SetupScript (Join-Path $Dir 'config/home/all.ps1')
+Invoke-SetupScript (Join-Path $Dir 'install/all.ps1')
+Invoke-SetupScript (Join-Path $Dir 'config/dev/all.ps1')
+Invoke-SetupScript (Join-Path $Dir 'config/security/all.ps1')
+Invoke-SetupScript (Join-Path $Dir 'config/shell/all.ps1')

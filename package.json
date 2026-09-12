@@ -1,0 +1,14 @@
+{
+  "name": "windows-setup-scripts",
+  "scripts": {
+    "all": "pwsh -File src/scripts/master.ps1",
+    "install:cli": "pwsh -File src/scripts/run-install.ps1 cli",
+    "install:all": "pwsh -File src/scripts/run-install.ps1 all",
+    "installs": "pwsh -File src/scripts/run-install.ps1 all",
+    "config": "pwsh -File src/scripts/run-config.ps1"
+  },
+  "devDependencies": {
+    "markdownlint-cli": "^0.49.1",
+    "prettier": "^3.6.2"
+  }
+}

@@ -1,0 +1,24 @@
+# CLI, security, and general winget tools. Preflight installs Git first.
+
+sharkdp.bat
+aristocratos.btop4win
+eza-community.eza
+sharkdp.fd
+junegunn.fzf
+GitHub.cli
+jqlang.jq
+ezwinports.make
+Insecure.Nmap
+OpenVPNTechnologies.OpenVPNConnect
+BurntSushi.ripgrep.MSVC
+koalaman.shellcheck
+tldr-pages.tlrc
+tree-sitter.tree-sitter-cli
+vim.vim
+JernejSimoncic.Wget
+ajeetdsouza.zoxide
+JesseDuffield.lazygit
+JesseDuffield.Lazydocker
+sxyazi.yazi
+Fastfetch-cli.Fastfetch
+curl.curl

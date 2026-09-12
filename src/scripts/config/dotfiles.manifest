@@ -1,0 +1,4 @@
+# File copies only; XDG-style config dirs are symlinked via Link-DotfilesXdgConfigDirs
+
+file home/.vimrc ~/.vimrc
+file vs-code/settings.json ~/AppData/Roaming/Code/User/settings.json

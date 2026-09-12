@@ -1,0 +1,6 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: Security policy
+    url: https://github.com/garretpatten/windows-setup-scripts/security/policy
+    about: Disclosure process (email in SECURITY.md).
