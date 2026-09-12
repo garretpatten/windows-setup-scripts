@@ -37,9 +37,15 @@ function Update-SessionPath {
         (Join-Path $env:LOCALAPPDATA 'Programs\oh-my-posh\bin')
         (Join-Path $HOME '.cargo\bin')
         (Join-Path $env:APPDATA 'nvm')
+        (Join-Path $env:LOCALAPPDATA 'nvm')
         (Join-Path $env:ProgramFiles 'Neovim\bin')
         (Join-Path $env:LOCALAPPDATA 'Programs\Ollama')
     )
+    # pip --user script dirs are never added to PATH by pip itself.
+    $pythonUserScripts = Get-ChildItem -Path (Join-Path $env:APPDATA 'Python') -Directory -ErrorAction SilentlyContinue |
+        ForEach-Object { Join-Path $_.FullName 'Scripts' } |
+        Where-Object { Test-Path -LiteralPath $_ }
+    $extras += @($pythonUserScripts)
     if ($programFilesX86) {
         $extras += (Join-Path $programFilesX86 'Nmap')
     }
@@ -67,9 +73,14 @@ function Export-PathForGitHubActions {
         (Join-Path $env:LOCALAPPDATA 'Programs\oh-my-posh\bin')
         (Join-Path $HOME '.cargo\bin')
         (Join-Path $env:APPDATA 'nvm')
+        (Join-Path $env:LOCALAPPDATA 'nvm')
         (Join-Path $env:ProgramFiles 'Neovim\bin')
         (Join-Path $env:LOCALAPPDATA 'Programs\Ollama')
     )
+    $pythonUserScripts = Get-ChildItem -Path (Join-Path $env:APPDATA 'Python') -Directory -ErrorAction SilentlyContinue |
+        ForEach-Object { Join-Path $_.FullName 'Scripts' } |
+        Where-Object { Test-Path -LiteralPath $_ }
+    $known += @($pythonUserScripts)
     if ($programFilesX86) {
         $known += (Join-Path $programFilesX86 'Nmap')
     }

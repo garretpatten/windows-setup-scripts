@@ -18,6 +18,7 @@ $ParallelScripts = @(
     'dev/language-servers.ps1'
     'shell/meslo-nerd-font.ps1'
     'apps/hacking-repos.ps1'
+    'apps/exiftool.ps1'
 )
 
 # Extra winget installs not covered by packages/*.packages (must stay sequential —

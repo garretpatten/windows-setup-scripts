@@ -24,14 +24,20 @@ function Install-WingetPackage {
     )
     if ($Source) { $wingetArgs += @('-s', $Source) }
     Write-Host "[INFO] winget $($wingetArgs -join ' ')"
-    try {
-        winget @wingetArgs
-        # 0 = ok; -1978335189 (0x8A15002B) = already installed
-        if ($LASTEXITCODE -and $LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
-            Write-Warning "winget install failed for ${Id} (exit $LASTEXITCODE)"
+    # Transient source/download failures are common in CI; retry before giving up.
+    $maxAttempts = 3
+    for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+        try {
+            winget @wingetArgs
+        } catch {
+            Write-Warning "winget install failed for ${Id}: $_"
         }
-    } catch {
-        Write-Warning "winget install failed for ${Id}: $_"
+        # 0 = ok; -1978335189 (0x8A15002B) = already installed
+        if (-not $LASTEXITCODE -or $LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq -1978335189) {
+            break
+        }
+        Write-Warning "winget install failed for ${Id} (exit $LASTEXITCODE, attempt $attempt of $maxAttempts)"
+        if ($attempt -lt $maxAttempts) { Start-Sleep -Seconds (10 * $attempt) }
     }
     Update-SessionPath
 }

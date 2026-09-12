@@ -69,13 +69,22 @@ function Assert-Browsers {
 
 function Assert-Nvm {
     Write-Section 'nvm'
-    $nvm = Join-Path $env:APPDATA 'nvm'
-    if (Test-Path $nvm) {
-        Test-PathExists 'nvm' $nvm
-    } elseif (Get-Command nvm -ErrorAction SilentlyContinue) {
+    # NVM for Windows 1.2.x installs under LOCALAPPDATA; older versions used APPDATA.
+    $candidates = @(
+        $env:NVM_HOME,
+        (Join-Path $env:LOCALAPPDATA 'nvm'),
+        (Join-Path $env:APPDATA 'nvm')
+    ) | Where-Object { $_ }
+    foreach ($dir in $candidates) {
+        if (Test-Path -LiteralPath $dir) {
+            Test-PathExists 'nvm' $dir
+            return
+        }
+    }
+    if (Get-Command nvm -ErrorAction SilentlyContinue) {
         Write-Pass 'nvm' 'nvm on PATH'
     } else {
-        Write-Fail 'nvm' "expected $nvm or nvm on PATH"
+        Write-Fail 'nvm' 'nvm not found (NVM_HOME, LOCALAPPDATA\nvm, APPDATA\nvm, PATH)'
     }
 }
 

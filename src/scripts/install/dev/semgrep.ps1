@@ -1,9 +1,14 @@
 #Requires -Version 7
 $ErrorActionPreference = 'Continue'
-. (Join-Path $PSScriptRoot '../../lib/Winget-Packages.ps1')
+. (Join-Path $PSScriptRoot '../../lib/Path.ps1')
 if (Get-Command semgrep -ErrorAction SilentlyContinue) { exit 0 }
+# Semgrep is not published on winget; pip is the documented Windows install path.
 try {
-    Install-WingetPackage -Id 'Semgrep.Semgrep'
+    python -m pip install --user --upgrade semgrep
+    if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) {
+        Write-Warning "semgrep pip install failed (exit $LASTEXITCODE)"
+    }
 } catch {
-    try { pip3 install --user semgrep } catch { Write-Warning "semgrep install failed: $_" }
+    Write-Warning "semgrep install failed: $_"
 }
+Update-SessionPath
