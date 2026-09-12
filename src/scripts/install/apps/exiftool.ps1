@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Continue'
 if (Get-Command exiftool -ErrorAction SilentlyContinue) { exit 0 }
 
 # PhilHarvey.ExifTool was removed from winget; install the official Windows
-# build from SourceForge, using the version published at exiftool.org/ver.txt.
+# build. exiftool.org/ver.txt publishes the version, SourceForge hosts the zip.
 $destDir = Join-Path $env:LOCALAPPDATA 'Programs\exiftool'
 if (Test-Path -LiteralPath (Join-Path $destDir 'exiftool.exe')) { exit 0 }
 
@@ -11,8 +11,26 @@ try {
     $ver = (Invoke-WebRequest -Uri 'https://exiftool.org/ver.txt' -UseBasicParsing).Content.Trim()
     if ($ver -notmatch '^\d+(\.\d+)*$') { throw "unexpected ver.txt content: $ver" }
     $zipPath = Join-Path $env:TEMP ("exiftool-${ver}_64.zip")
-    $zipUrl = "https://sourceforge.net/projects/exiftool/files/exiftool-${ver}_64.zip/download"
-    Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing
+    $urls = @(
+        "https://downloads.sourceforge.net/project/exiftool/exiftool-${ver}_64.zip",
+        "https://sourceforge.net/projects/exiftool/files/exiftool-${ver}_64.zip/download"
+    )
+    $downloaded = $false
+    foreach ($url in $urls) {
+        try {
+            curl.exe -sSL --retry 2 -o $zipPath $url
+            # >1MB guards against HTML interstitial pages instead of the zip.
+            if ($LASTEXITCODE -eq 0 -and (Test-Path -LiteralPath $zipPath) -and (Get-Item -LiteralPath $zipPath).Length -gt 1MB) {
+                $downloaded = $true
+                break
+            }
+            Write-Warning "exiftool download unusable from $url"
+        } catch {
+            Write-Warning "exiftool download failed from ${url}: $_"
+        }
+    }
+    if (-not $downloaded) { throw 'all exiftool download sources failed' }
+
     $stage = Join-Path $env:TEMP ("exiftool-${ver}-extract")
     if (Test-Path -LiteralPath $stage) { Remove-Item -LiteralPath $stage -Recurse -Force }
     Expand-Archive -LiteralPath $zipPath -DestinationPath $stage -Force

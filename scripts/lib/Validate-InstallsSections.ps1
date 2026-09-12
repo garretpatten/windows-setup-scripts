@@ -146,7 +146,17 @@ function Assert-DevDesktop {
 function Assert-SecurityCli {
     Write-Section 'Security'
     Test-CommandOnPath 'nmap' 'nmap'
-    Test-CommandOnPath 'exiftool' 'exiftool'
+    if (Get-Command exiftool -ErrorAction SilentlyContinue) {
+        Test-CommandOnPath 'exiftool' 'exiftool'
+    } else {
+        # Installer adds its dir to the user PATH; accept the known location too.
+        $installed = Join-Path $env:LOCALAPPDATA 'Programs\exiftool\exiftool.exe'
+        if (Test-Path -LiteralPath $installed) {
+            Write-Pass 'exiftool' $installed
+        } else {
+            Write-Fail 'exiftool' 'command not in PATH: exiftool'
+        }
+    }
     Test-WingetId 'openvpn' 'OpenVPNTechnologies.OpenVPNConnect'
     Test-PathExists 'hacking-payloads' (Join-Path $HOME 'Hacking/PayloadsAllTheThings')
     Test-PathExists 'hacking-seclists' (Join-Path $HOME 'Hacking/SecLists')
