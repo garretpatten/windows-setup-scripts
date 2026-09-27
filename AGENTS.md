@@ -8,8 +8,10 @@ desktop); npm shortcuts are `npm run install:cli`, `npm run install:all`,
 separately. **Never edit, commit, or bump `src/dotfiles` from this repo** unless
 the user explicitly asks. Consume it read-only via `Link-DotfilesXdgConfigDirs`
 in `config/dotfiles.ps1` (symlinks each `src/dotfiles/config/<app>/` under
-`%LOCALAPPDATA%` / `%APPDATA%`) and targeted file copies. `run-config.ps1` and
-`master.ps1` initialize/update submodules before running config.
+`%LOCALAPPDATA%` / `%APPDATA%`, except `powershell`, whose `profile.ps1`
+`Install-DotfilesPowerShellProfile` symlinks to
+`Documents\PowerShell\profile.ps1`) and targeted file copies. `run-config.ps1`
+and `master.ps1` initialize/update submodules before running config.
 
 ## Dotfiles submodule
 

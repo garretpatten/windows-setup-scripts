@@ -5,4 +5,5 @@ $Dir = $PSScriptRoot
 . (Join-Path $Dir '../lib/Dotfiles-Install.ps1')
 
 Link-DotfilesXdgConfigDirs
+Install-DotfilesPowerShellProfile
 Install-DotfilesFromManifest (Join-Path $Dir 'dotfiles.manifest')

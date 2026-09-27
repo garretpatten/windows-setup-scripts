@@ -75,7 +75,7 @@ Each app uses one install path:
 | `lsp.packages`                 | Go, Ruby, OpenJDK, Lua language server                            |
 | `lsp-optional.packages`        | Optional language runtimes                                        |
 | `dev.packages`                 | Neovim, Python                                                    |
-| `third-party-cli.packages`     | Docker Desktop (optional); Node.js LTS installed in `all.ps1`         |
+| `third-party-cli.packages`     | Docker Desktop (optional); Node.js LTS installed in `all.ps1`     |
 | `third-party-desktop.packages` | Brave, Bruno, Signal                                              |
 
 ### Apps (`install/apps/`)
@@ -111,9 +111,10 @@ expect them):
 ## Configuration (`src/scripts/config/`)
 
 Symlinks and settings from `src/dotfiles` (submodule, read-only): `config/dotfiles.ps1`
-symlinks each `config/<app>/` tree under `%LOCALAPPDATA%` or `%APPDATA%`; copies for
-shell home files and VS Code settings. Covers Neovim, btop, fastfetch, terminals,
-Git Credential Manager, Windows UI prefs (skipped in CI without a desktop session),
-firewall rules (LocalSend), home directory layout.
+symlinks each `config/<app>/` tree under `%LOCALAPPDATA%` or `%APPDATA%` and the PowerShell
+profile to `Documents\PowerShell\profile.ps1` (seeding user-scope `POSH_THEME` for Oh My
+Posh); copies for shell home files and VS Code settings. Covers Neovim, btop, fastfetch,
+terminals, Git Credential Manager, Windows UI prefs (skipped in CI without a desktop
+session), firewall rules (LocalSend), home directory layout.
 
 See [AGENTS.md](AGENTS.md) for contributor conventions, PSScriptAnalyzer, and CI details.

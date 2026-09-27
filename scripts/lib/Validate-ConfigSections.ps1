@@ -9,6 +9,7 @@ function Assert-ConfigDotfiles {
     Test-PathExists 'dotfiles-zellij' (Join-Path $env:LOCALAPPDATA 'zellij')
     Test-PathExists 'dotfiles-tmux' (Join-Path $env:LOCALAPPDATA 'tmux')
     Test-PathExists 'dotfiles-zsh' (Join-Path $env:LOCALAPPDATA 'zsh')
+    Test-PathExists 'dotfiles-powershell-profile' (Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'PowerShell/profile.ps1')
 }
 
 function Assert-ConfigHome {
