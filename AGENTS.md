@@ -112,3 +112,9 @@ Docker Desktop checks are soft in CI when Docker is unavailable.
 ## Commits
 
 Only commit when the user asks. Do not commit secrets.
+
+## GitHub Actions
+
+Whenever a GitHub workflow is added, all GitHub Action pins in that workflow
+should be updated to point to the full-length commit SHA of the most recent
+release.
