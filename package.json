@@ -8,7 +8,7 @@
     "config": "pwsh -File src/scripts/run-config.ps1"
   },
   "devDependencies": {
-    "markdownlint-cli": "^0.49.1",
+    "markdownlint-cli": "^0.50.0",
     "prettier": "^3.6.2"
   }
 }
