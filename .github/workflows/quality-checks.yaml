@@ -10,14 +10,14 @@ jobs:
   quality-checks:
     name: 'Linters'
     # yamllint disable-line rule:line-length
-    uses: garretpatten/quality-checks/.github/workflows/quality-checks.yaml@0033bf51737a2eee884f6f0ddb75ad264ef3c2bc # master
+    uses: garretpatten/quality-checks/.github/workflows/quality-checks.yaml@e2972441e8dab268381e8b2b59af9ecbec71fbea # master
     with:
       markdownlint_run: true
       prettier_run: true
       shellcheck_run: false
       yamllint_run: true
     secrets:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
 
   psscriptanalyzer:
     name: 'PSScriptAnalyzer'
