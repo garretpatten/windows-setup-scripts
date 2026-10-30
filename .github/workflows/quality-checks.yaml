@@ -16,7 +16,8 @@ jobs:
       prettier_run: true
       shellcheck_run: false
       yamllint_run: true
-    secrets: inherit
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   psscriptanalyzer:
     name: 'PSScriptAnalyzer'
