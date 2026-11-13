@@ -1,5 +1,9 @@
 # Windows setup scripts
 
+[![License: MIT](https://img.shields.io/github/license/garretpatten/windows-setup-scripts?style=flat-square)](./LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/garretpatten/windows-setup-scripts/test-runner.yaml?branch=master&label=Windows%20CI&logo=github&style=flat-square)](https://github.com/garretpatten/windows-setup-scripts/actions/workflows/test-runner.yaml)
+[![Platform: Windows 11](https://img.shields.io/badge/platform-Windows%2011-0078D6?style=flat-square&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
+
 Provisioning for a personal Windows 11 desktop: install scripts under
 `src/scripts/install/`, dotfiles and system config under `src/scripts/config/`,
 orchestrated by `master.ps1`. Mirrors the layout and app set of
